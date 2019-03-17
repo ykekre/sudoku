@@ -1,0 +1,42 @@
+.modal-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.8rem;
+  transform: translateY(-50%);
+  background-color: $color-modal-background;
+
+
+  .modal-body {
+
+    width: 100%;
+
+    p {
+      text-align: center;
+
+    }
+
+    .btn-level-group {
+      width: 80%;
+      display: flex;
+      justify-content: space-around;
+
+      .btn-lg {
+        font-size: 1.7rem;
+        width:24%;
+        align-self: center;
+        background-color: $color-modal-buttons;
+        color: $color-modal-btn-text;
+        border-color:  $color-modal-btn-text;
+      }
+    }
+
+  }
+
+
+
+
+
+
+}

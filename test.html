@@ -1,0 +1,72 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html lang="en">
+<head>
+<title>Keypad</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+<style type="text/css">
+.btns{  width: 40px; }
+</style>
+
+<script type="text/javascript">
+
+onload=function(){ attachHandlers(); }
+
+function attachHandlers(){
+  var the_nums = document.getElementsByName("number");
+  for (var i=0; i < the_nums.length; i++) { the_nums[i].onclick=inputNumbers; }
+}
+
+function inputNumbers() {
+  var the_field = document.getElementById('calcfield');
+  var the_value = this.value;
+  switch (the_value) {
+    case '+/-' :
+      the_field.value = Number(the_field.value) * -1;
+      break;
+    default : document.getElementById("calcfield").value += the_value;
+      break;
+  }
+  document.getElementById('calcfield').focus();
+  return true;
+}
+
+function getValue() {
+  alert(document.getElementById('calcfield').value);
+  document.getElementById('calcfield').focus();
+  return false;
+}
+
+</script>
+</head>
+<body>
+<form name="CalcForm" onsubmit="getValue()" AUTOCOMPLETE="OFF">
+
+<div id="keypad" style="width:135px;border:1px solid red;float:left">
+    <div>
+     <input type="text" name="calcvalues" id="calcfield" value="" size="17">
+    </div>
+    <div id="row1">
+     <input type="button" name="number" value="1" id="_1" class="btns">
+     <input type="button" name="number" value="2" id="_2" class="btns">
+     <input type="button" name="number" value="3" id="_3" class="btns">
+    </div>
+    <div id="row2">
+     <input type="button" name="number" value="4" id="_4" class="btns">
+     <input type="button" name="number" value="5" id="_5" class="btns">
+     <input type="button" name="number" value="6" id="_6" class="btns">
+    </div>
+    <div id="row3">
+     <input type="button" name="number" value="7" id="_7" class="btns">
+     <input type="button" name="number" value="8" id="_8" class="btns">
+     <input type="button" name="number" value="9" id="_9" class="btns">
+    </div>
+    <div id="row4">
+     <input type="button" name="number" value="." id="_dot" class="btns">
+     <input type="button" name="number" value="0" id="_0" class="btns">
+     <input type="button" name="number" value="+/-" id="chgsign" class="btns">
+    </div>
+</div>
+</form>
+</body>
+</html>

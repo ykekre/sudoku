@@ -1,0 +1,32 @@
+html {
+  font-size: 62.5%; }
+
+body {
+  font-size: 1.6rem;
+  background-color: #fffdf8; }
+
+.grid {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transform: translateY(-10%); }
+  .grid .board {
+    height: 54vh;
+    width: 54vh;
+    background-color: #fff0ca; }
+    .grid .board .grid-row {
+      height: 11.1%;
+      width: 100%;
+      display: flex; }
+      .grid .board .grid-row .col-1-of-9 {
+        width: 11.1%;
+        height: 100%;
+        font-size: 2.2rem;
+        padding: 0.5rem;
+        text-align: center; }
+    .grid .board .board-sharp {
+      background-color: #ffe6ca; }
+
+.navbar {
+  background-color: #FFF8e5; }

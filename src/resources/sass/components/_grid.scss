@@ -1,0 +1,104 @@
+
+.grid {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  // transform: translateY(-5%);
+
+  .board {
+    height: 63vh;
+    width: 63vh;
+    //  background-color: $color-board-bg;
+
+
+    .grid-row {
+      height: 11.1%;
+      width: 100%;
+      display: flex;
+
+      .col-1-of-9 {
+        width: 11.1%;
+        height: 100%;
+        font-size:2rem;
+        padding: 0.5rem;
+        text-align: center;
+        font-family: $numbers;
+        font-weight: 700;
+        color: $color-number;
+        // background-color: $color-board-bg;
+
+        &.wrong-input {
+          color: $color-wrong-input ;
+        }
+        &.highlight-clicked {
+          background-color: $highlight-clicked;
+        }
+
+        &.highlight-same {
+          background-color: $highlight-same;
+        }
+
+        &.highlight-peers {
+          background-color: $highlight-peers;
+        }
+
+        &.highlight-same-squares {
+          background-color: $highlight-same-squares;
+        }
+        .unsolved {
+          width: 100%;
+          height: 100%;
+
+          input {
+            width: 100%;
+          height: 100%;
+          text-align: center;
+          outline: none;
+          border: none;
+         background-color: $color-light-1;
+         color: $color-input-number;
+         font-family: $numbers;
+        font-weight: 700;
+
+         &.wrong-input {
+          color: $color-wrong-input;
+        }
+
+         &.highlight-clicked {
+          background-color: $highlight-clicked;
+        }
+
+         &.highlight-same {
+          background-color: $highlight-same;
+        }
+
+        &.highlight-peers {
+          background-color: $highlight-peers;
+        }
+        &.highlight-same-squares {
+          background-color: $highlight-same-squares;
+        }
+
+      }
+
+        }
+      }
+      .board-sharp {
+         background-color: $color-board-sharp;
+
+        .unsolved input {
+
+           background-color: $color-board-sharp;
+        }
+      }
+
+  }
+
+
+}
+
+}
+
+
