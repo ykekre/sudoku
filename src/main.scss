@@ -3,7 +3,6 @@
 @import './resources/sass/base/base';
 
 @import './resources/sass/components/grid';
-@import './resources/sass/components/navbar';
 @import './resources/sass/components/modal';
 @import './resources/sass/components/numpad';
 @import './resources/sass/base/queries';
@@ -13,7 +12,8 @@ input[type='number'] {
 }
 /* Webkit browsers like Safari and Chrome */
 input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button {
+input[type=number]::-webkit-outer-spin-button,
+[type=button], [type=reset], [type=submit], button{
   -webkit-appearance: none;
   margin: 0;
 }

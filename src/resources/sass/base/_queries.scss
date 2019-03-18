@@ -29,6 +29,13 @@ transform: translateY(-60%);
       width: 100%;
     }
   }
+
+  .dropdown-menu a{
+    letter-spacing: 1.2px;
+  font-size: 1.2rem;
+
+  }
+
 }
 
 /* Small phones to small tablets: */
@@ -65,9 +72,14 @@ transform: translateY(-25%);
       .btn-lg {
         font-size: 1.4rem;
       }
-
     }
-
-
   }
-}
+
+  .dropdown-menu a{
+    letter-spacing: 1.1px;
+    font-size: 1.1rem;
+  }
+    .dropdown-item {
+      padding: .25rem 0.8rem;
+    }
+  }

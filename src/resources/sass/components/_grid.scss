@@ -5,11 +5,14 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  // position: relative;
   // transform: translateY(-5%);
 
   .board {
+
     height: 63vh;
     width: 63vh;
+
     //  background-color: $color-board-bg;
 
 
@@ -17,6 +20,18 @@
       height: 11.1%;
       width: 100%;
       display: flex;
+      position: relative;
+
+      svg {
+        width: 5vh;
+        height: 5vh;
+        position: absolute;
+        top: -3.5vh;
+        right: -3.5vh;
+        fill: $color-number;
+
+      }
+
 
       .col-1-of-9 {
         width: 11.1%;
@@ -98,6 +113,11 @@
       }
 
   }
+}
+
+.dropdown-menu {
+
+  background-color: $color-modal-background;
 
 
 }

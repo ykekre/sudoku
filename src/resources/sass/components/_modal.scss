@@ -5,14 +5,14 @@
   justify-content: center;
   transform: translateY(-50%);
   background-color: $color-modal-background;
-
+  color: $color-modal-text;
 
   .modal-body {
 
     width: 100%;
-
     p {
       text-align: center;
+
     }
 
     .btn-level-group {
@@ -26,10 +26,11 @@
         align-self: center;
         background-color: $color-modal-buttons;
         color: $color-modal-btn-text;
-        border-color:  $color-modal-btn-text;
-      }
+         border-color:  none;
     }
 
   }
+
+}
 
 }

@@ -1,26 +1,30 @@
 
 //* Main Back ground colors
-$color-light: #FFF8e5;
 $color-light-1: #fffce5;
 
 //*Modal Colors
-$color-modal-btn-text : #eff3ea;
-$color-modal-background : #DFEAD2;
-$color-modal-buttons: #B8C9A1;
+$color-modal-background : #fae5b8;
+$color-modal-text: #4c3b78cc;
+
+$color-modal-buttons: rgba(212, 185, 126, 0.89);
+$color-modal-btn-text : #736697;
 
 //* Board Colors
 $color-board-sharp: #EFF3EA;
-$color-number: #baa07e;
- $color-input-number: #5e5f82;
+$color-number: rgba(212, 185, 126, 0.904);
+ $color-input-number: #4c3b78cc;
 
-$color-wrong-input: #e64b42;
+$color-wrong-input: #e15f41;
 
 //*Board highlights
-$highlight-clicked: #e3c5d0;
+// $highlight-clicked: #e3c5d0;
+$highlight-clicked: rgba(220, 210, 151, 0.904);
 
-// $highlight-same: #f4554d;
+
+
 $highlight-same: #ff7a73;
-$highlight-peers: #ecf2c3;
+// $highlight-peers: #ecf2c3;
+$highlight-peers: #fae5b8e5;
 $highlight-same-squares: #fff6b2;
 
 //*Fonts

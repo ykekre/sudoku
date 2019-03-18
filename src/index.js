@@ -1,5 +1,5 @@
 import "./main.scss";
-import {elements} from './js/views/base';
+import {elements, renderLoader, clearLoader} from './js/views/base';
 import Puzzle from './js/models/Puzzle';
 import {setLevel, getLevel } from './js/views/modalView';
 import {makeBoard, highlightCells, onCellClicked, colorWrongInput, removeColorWrongInput, squareValue, removeHighlight} from './js/views/puzzleView';
@@ -9,7 +9,7 @@ import { showBadgeCount } from "./js/views/numpadView";
 //?Keep track of game state: Puzzle
 const state = {};
 
- getUnitList();
+getUnitList();
 getUnits();
 
 function setupListeners() {
@@ -38,11 +38,12 @@ function loadModal() {
 //?Puzzle board related stuff
 function controlPuzzle() {
   //*1. Hide modal
-    $('#levelModal').modal('hide');
+  $('#levelModal').modal('hide');
 
   //*2. get difficulty level selected by user
     const difficulty = getLevel();
 
+  //*2. get difficulty level selected by user
     if(difficulty) {
       state.puzzle = new Puzzle(difficulty);
       const puzzleBoard =  state.puzzle.setBoard();

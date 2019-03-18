@@ -10,17 +10,26 @@
   .modal-header {
     font-family: 'Raleway', sans-serif;
     font-weight: 800;
+    color: $color-modal-text;
   }
   .modal-body{
     font-family: 'Pacifico', cursive;
     // text-transform: uppercase;
     font-style: italic;
     font-weight: 700;
-
     letter-spacing: 1.5px;
-
+    color: $color-modal-text;
   }
 
 }
 
+.dropdown-menu a{
+  font-family: 'Pacifico', cursive;
+  // text-transform: uppercase;
+  font-style: italic;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+font-size: 1.5rem;
+color: $color-modal-text;
+}
 
