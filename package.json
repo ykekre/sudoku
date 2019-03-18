@@ -4,8 +4,9 @@
   "description": "Online sudoku puzzle solving game",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --config webpack.dev.js",
-    "build": "webpack --config webpack.prod.js"
+    "dev": "webpack-dev-server --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
@@ -24,6 +25,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "clean-webpack-plugin": "^2.0.0",
+    "express": "^4.16.4",
     "sudoku": "0.0.2"
   },
   "devDependencies": {
