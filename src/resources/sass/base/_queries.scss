@@ -1,0 +1,73 @@
+
+/* tablets with large height */
+@media only screen and (min-height: 940px) {
+  .grid .board {
+    height: 54vh;
+    width: 54vh;
+
+
+  .grid-row .col-1-of-9 {
+
+    font-size:1.7rem;
+  }
+  }
+  .numpad {
+
+    width: 55vh;
+    height:11vh;
+
+    .list-group-item {
+      width:11vh;
+      font-size: 1.7rem;
+    }
+  }
+
+  .modal-content {
+transform: translateY(-60%);
+    font-size: 1.7rem;
+    .modal-body .btn-level-group {
+      width: 100%;
+    }
+  }
+}
+
+/* Small phones to small tablets: */
+@media only screen and (max-width: 576px) {
+
+ .grid .board {
+    height: 45vh;
+    width: 45vh;
+
+
+  .grid-row .col-1-of-9 {
+
+    font-size:1.6rem;
+  }
+  }
+  .numpad {
+
+    width: 50vh;
+    height:10vh;
+
+    .list-group-item {
+      width:10vh;
+      font-size: 1.6rem;
+    }
+  }
+
+  .modal-content {
+transform: translateY(-25%);
+    font-size: 1.6rem;
+
+    .modal-body .btn-level-group {
+      width: 100%;
+
+      .btn-lg {
+        font-size: 1.4rem;
+      }
+
+    }
+
+
+  }
+}

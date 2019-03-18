@@ -1,11 +1,12 @@
 @import './resources/sass/base/variables';
  @import './resources/sass/base/typography';
 @import './resources/sass/base/base';
+
 @import './resources/sass/components/grid';
 @import './resources/sass/components/navbar';
 @import './resources/sass/components/modal';
 @import './resources/sass/components/numpad';
-
+@import './resources/sass/base/queries';
 /* For Firefox */
 input[type='number'] {
   -moz-appearance:textfield;

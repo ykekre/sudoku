@@ -3,7 +3,6 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.8rem;
   transform: translateY(-50%);
   background-color: $color-modal-background;
 
@@ -14,7 +13,6 @@
 
     p {
       text-align: center;
-
     }
 
     .btn-level-group {
@@ -33,10 +31,5 @@
     }
 
   }
-
-
-
-
-
 
 }

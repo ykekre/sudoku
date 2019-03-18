@@ -27,6 +27,9 @@
         font-family: $numbers;
         font-weight: 700;
         color: $color-number;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         // background-color: $color-board-bg;
 
         &.wrong-input {

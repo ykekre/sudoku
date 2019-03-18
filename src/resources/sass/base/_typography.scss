@@ -5,10 +5,22 @@
 }
 
 .modal-content {
-  font-family: 'Arvo', serif;
-  text-transform: uppercase;
-  font-weight: 700;
   font-size: 2rem;
-  letter-spacing: 1px;
+
+  .modal-header {
+    font-family: 'Raleway', sans-serif;
+    font-weight: 800;
+  }
+  .modal-body{
+    font-family: 'Pacifico', cursive;
+    // text-transform: uppercase;
+    font-style: italic;
+    font-weight: 700;
+
+    letter-spacing: 1.5px;
+
+  }
 
 }
+
+
