@@ -1,3 +1,9 @@
+/*
+Puzzle Solver http://pankaj-k.net/sudoku/sudoku.js
+Credit: http://pankaj-k.net/
+
+*/
+
 function cross(A, B){
   let C = [];
   for (let a in A)
@@ -16,8 +22,7 @@ const rows = ['A','B','C','D','E','F','G','H','I'];
 const cols = ['1','2','3','4','5','6','7','8','9'];
 const digits = "123456789";
 export const squares = cross(rows, cols);
-// let unitlist = [];
-// let units = {};
+
 let nassigns = 0;
 let neliminations = 0;
 let nsearches = 0;
@@ -51,30 +56,6 @@ var peers = {};
           peers[squares[s]][ul[s2]] = true;
     }
   }
-
- export function getUnitList () {
-
-  for (let c in cols)
-    unitlist.push(cross(rows, [cols[c]]));
-  for (let r in rows)
-    unitlist.push(cross([rows[r]], cols));
-  const rrows = [['A','B','C'], ['D','E','F'], ['G','H','I']];
-  const ccols = [['1','2','3'], ['4','5','6'], ['7','8','9']];
-  for (let rs in rrows)
-    for (let cs in ccols)
-      unitlist.push(cross(rrows[rs], ccols[cs]));
-      return unitlist;
- }
-
- export function getUnits() {
-  for (let s in squares){
-    units[squares[s]] = [];
-    for (let u in unitlist)
-      if (member(squares[s], unitlist[u]))
-        units[squares[s]].push(unitlist[u]);
-  }
-   return units;
- }
 
 export function findPeers(cell) {
 
@@ -111,8 +92,6 @@ function parse_grid(grid){ // Given a string of 81 digits (or . or 0 or -), retu
       return false;
   return values;
 }
-
-
 
 function assign(values, sq, dig){ // Eliminate all the other values (except dig) from values[sq] and propagate.
   ++nassigns;
@@ -188,8 +167,6 @@ function search(values){
 export function solve(puzzle){
   var sol = search(parse_grid(puzzle));
   //var sol = parse_grid(puzzleText);
-
-
   return sol;
 }
 

@@ -40,15 +40,12 @@ export function makeBoard (puzzle) {
   function helper(row, index, value) {
 
     let square =  document.querySelector(`.${row}${index+1}`);
-
     if(value !== null) {
       square.textContent = value;
-
       square.classList.add('solved');
-
-    } else {
+    }
+    else {
       square.innerHTML = inputMarkup(row, index)
-
     }
   }
 }
@@ -64,13 +61,13 @@ export function squareValue(cell) {
   }
 }
 
-  function inputMarkup(row, index) {
-    const markup = `  <div class="unsolved">
-                        <input type="text" id="${row}${index+1}" value = "" onkeypress='return event.charCode >= 49 && event.charCode <= 57' pattern="[1-9]" maxlength="1" >
-                      </div>`
+function inputMarkup(row, index) {
+  const markup = `<div class="unsolved">
+                    <input type="text" id="${row}${index+1}" value = "" onkeypress='return event.charCode >= 49 && event.charCode <= 57' pattern="[1-9]" maxlength="1" >
+                  </div>`
 
-                      return markup;
-  }
+  return markup;
+}
 
 export function highlightCells(cellsArr, clazz) {
 
@@ -83,14 +80,15 @@ export function highlightCells(cellsArr, clazz) {
 }
 
 export function onCellClicked(e) {
-let cell ='';
+  let cell ='';
   const clicked = e.target.closest('.col-1-of-9');
   if(clicked) {
-     cell = clicked.id;
+    cell = clicked.id;
   }
   else {
     return;
   }
+
   removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares');
 
   //*1.if cell has some value, calculate same squares from cell value
@@ -113,9 +111,8 @@ let cell ='';
     let cells = document.querySelectorAll(`.${classs}`);
 
     for (const cell of cells) {
-
      if(cell)
-      cell.classList.remove(`${classs}`)
+        cell.classList.remove(`${classs}`)
     }
   }
 }
@@ -123,36 +120,30 @@ let cell ='';
 export function removeHighlight(cells, clazz) {
   for (const cell of cells) {
     if(cell ){
-     const nodes = document.querySelectorAll(`#${cell}`)
-
-     for (const node of nodes) {
-      node.classList.remove(`${clazz}`);
-     }
+      const nodes = document.querySelectorAll(`#${cell}`)
+      for (const node of nodes) {
+        node.classList.remove(`${clazz}`);
+      }
     }
-
-   }
-
+  }
 }
+
 export function colorWrongInput(cell) {
-
   let cells = document.querySelectorAll(`#${cell}`);
-
- for (const cell of cells) {
-
-  if(cell)
-   cell.classList.add('wrong-input');
- }
+  for (const cell of cells) {
+    if(cell)
+      cell.classList.add('wrong-input');
+  }
 }
 
 export function removeColorWrongInput(cell) {
-
   let cells = document.querySelectorAll(`#${cell}`);
- for (const cell of cells) {
-  if(cell) {
-    if(cell.classList.contains('wrong-input'))
-      cell.classList.remove('wrong-input');
+  for (const cell of cells) {
+    if(cell) {
+      if(cell.classList.contains('wrong-input'))
+        cell.classList.remove('wrong-input');
+    }
   }
- }
 }
 
  function sameSquares (cell) {
@@ -164,9 +155,9 @@ export function removeColorWrongInput(cell) {
         sameSquares.push(square);
       }
     }
-    highlightCells(sameSquares, 'highlight-same-squares');
-    return sameSquares;
-    //
+  highlightCells(sameSquares, 'highlight-same-squares');
+  return sameSquares;
+
 
   }
 

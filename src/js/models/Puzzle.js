@@ -25,12 +25,12 @@ export default class Puzzle {
     let  test = this.getPuzzle();
 
       if(this.getRating(test) < 0.5 ) {
-
-         this.board = test;
+         this.board = test.map(el =>  el === null ? null : el+1)
          return;
+         }
       }
     }
-  }
+
 
   getMedium(){
     while(true) {
@@ -38,7 +38,7 @@ export default class Puzzle {
     let rating = this.getRating(test);
       if(rating > 0.75 && rating < 2 ) {
 
-         this.board = test;
+        this.board = test.map(el =>  el === null ? null : el+1)
          return;
       }
     }
@@ -50,7 +50,7 @@ export default class Puzzle {
     let rating = this.getRating(test);
       if(rating > 2.5  ) {
 
-         this.board = test;
+        this.board = test.map(el =>  el === null ? null : el+1)
          return;
       }
     }
@@ -71,16 +71,6 @@ export default class Puzzle {
       break;
     }
 
-    if(!this.board.includes(9)) {
-
-      let alteredBoard = [];
-      alteredBoard =  this.board.map( (el) => {
-          return el===0 ? 9 : el;
-      } )
-
-      return alteredBoard;
-
-    }
     return this.board;
   }
 
