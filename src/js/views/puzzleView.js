@@ -66,7 +66,7 @@ export function squareValue(cell) {
 
   function inputMarkup(row, index) {
     const markup = `  <div class="unsolved">
-                        <input type="text" id="${row}${index+1}" value = "" pattern="[1-9]" maxlength="1" >
+                        <input type="text" id="${row}${index+1}" value = "" onkeypress='return event.charCode >= 49 && event.charCode <= 57' pattern="[1-9]" maxlength="1" >
                       </div>`
 
                       return markup;
