@@ -4,20 +4,9 @@ export const elements = {
    'squares': document.querySelectorAll('div.unsolved > input'),
    'board' : document.querySelector('.board'),
    'grid' : document.querySelector('.grid'),
-   'numpad'  : document.querySelector('.numpad')
+   'numpad'  : document.querySelector('.numpad'),
+   'reset' : document.querySelector('#btn-reset'),
+   'check' : document.querySelector('#btn-checkErrors'),
+   'solve' : document.querySelector('#btn-solve')
 }
 
-export function renderLoader(parent) {
-console.log(parent, 'are we there?');
-  const loader = `<div class="spinner-border" role="status">
-                    <span class="sr-only">Loading...</span>
-                  </div>`
-
-
- parent.insertAdjacentHTML('afterbegin', loader);
-}
-
-export function clearLoader(){
-  const loader = document.querySelector(`.spinner-border`);
-  if (loader) loader.parentElement.removeChild(loader);
-};

@@ -1,3 +1,5 @@
+import { isNull } from 'util';
+import {solve} from '../vendor/sudoku'
 
 const sudoku = require('sudoku');
 
@@ -22,7 +24,7 @@ export default class Puzzle {
     while(true) {
     let  test = this.getPuzzle();
 
-      if(this.getRating(test) < 1 ) {
+      if(this.getRating(test) < 0.5 ) {
 
          this.board = test;
          return;
@@ -34,7 +36,7 @@ export default class Puzzle {
     while(true) {
     let  test = this.getPuzzle();
     let rating = this.getRating(test);
-      if(rating > 1 && rating < 3 ) {
+      if(rating > 0.75 && rating < 2 ) {
 
          this.board = test;
          return;
@@ -46,7 +48,7 @@ export default class Puzzle {
     while(true) {
     let  test = this.getPuzzle();
     let rating = this.getRating(test);
-      if(rating > 3  ) {
+      if(rating > 2.5  ) {
 
          this.board = test;
          return;
@@ -81,9 +83,19 @@ export default class Puzzle {
     }
     return this.board;
   }
+
+  parsePuzzle(puzzle) {
+    this.puzzleString =  puzzle.map( cell =>  (isNull(cell))? 0 : cell ).join('');
+
+   }
+
+   solvePuzzle () {
+     this.solvedPuzzle = solve(this.puzzleString);
+
+     return this.solvedPuzzle
+   }
+
 }
-
-
 
 
 

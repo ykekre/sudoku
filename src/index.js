@@ -1,5 +1,5 @@
 import "./main.scss";
-import {elements, renderLoader, clearLoader} from './js/views/base';
+import {elements} from './js/views/base';
 import Puzzle from './js/models/Puzzle';
 import {setLevel, getLevel } from './js/views/modalView';
 import {makeBoard, highlightCells, onCellClicked, colorWrongInput, removeColorWrongInput, squareValue, removeHighlight} from './js/views/puzzleView';
@@ -10,24 +10,29 @@ import { showBadgeCount } from "./js/views/numpadView";
 const state = {};
 
 getUnitList();
-getUnits();
-
+ getUnits();
 function setupListeners() {
 
   //*1. modal button listeners
     for (const btn of elements.level) {
       btn.addEventListener('click',setLevel);
-      btn.addEventListener('click', controlPuzzle);
+      // btn.addEventListener('click', controlPuzzle);
       }
 
   //*2. Board cell listeners
+   //!When user clicks on a cell
+   elements.board.addEventListener('click', onCellClicked)
+
     //! When user enters value in any cell
+     elements.board.addEventListener('beforeinput', onCellClicked)
     elements.board.addEventListener('input', onCellChange)
 
-    //!When user clicks on a cell
-    elements.board.addEventListener('click', onCellClicked)
 
 
+  //*3 Settings button listeners
+     elements.reset.addEventListener('click', reset);
+    elements.check.addEventListener('click', check);
+    elements.solve.addEventListener('click', solve);
   }
 
 //? Load difficulty level modal
@@ -35,10 +40,21 @@ function loadModal() {
   $('#levelModal').modal();
 }
 
+$('#levelModal').on('hide.bs.modal', controlPuzzle)
+
+
+$('.toast').on('show.bs.toast', function () {
+
+  let level = getLevel();
+  if(!level) level =  'Easy';
+document.querySelector('.toast-body').textContent = `Game started with ${level} level`;
+
+})
+
 //?Puzzle board related stuff
-function controlPuzzle() {
-  //*1. Hide modal
-  $('#levelModal').modal('hide');
+ function controlPuzzle() {
+
+  $('.toast').toast('show');
 
   //*2. get difficulty level selected by user
     const difficulty = getLevel();
@@ -46,15 +62,27 @@ function controlPuzzle() {
   //*2. get difficulty level selected by user
     if(difficulty) {
       state.puzzle = new Puzzle(difficulty);
-      const puzzleBoard =  state.puzzle.setBoard();
+    }
+    else state.puzzle = new Puzzle('easy');
+
+    state.board =  state.puzzle.setBoard();
+
 
     //*3. Render puzzle board
-      makeBoard(puzzleBoard);
+      makeBoard(state.board);
+
 
     //*4 Calculate numpad badge values
       badgeCounter();
       showBadgeCount();
-    }
+
+    //*5 Parse puzzle array into string
+     state.puzzle.parsePuzzle(state.board);
+
+    //*6 Solve Puzzle
+   state.solved =  Object.values(state.puzzle.solvePuzzle());
+   console.log(state.solved);
+
 }
 
  //? When user enters a value
@@ -65,10 +93,10 @@ function onCellChange(e) {
     const value = parseInt(square.value)
 
     if(!checkValidity(value, square.id)) {
-      colorWrongInput(square.id);
+      // colorWrongInput(square.id);
     }
     else{
-      removeColorWrongInput(square.id)
+       removeColorWrongInput(square.id)
     }
 
   //*update badges in numpad
@@ -85,15 +113,20 @@ function checkValidity(value, cell) {
   for (const peer of peers) {
     if(value === squareValue(peer)) {
       matched.push(peer);
-      highlightCells(matched, 'highlight-same');
-    removeHighlight(matched, 'highlight-peers');
     }
 
   }
-  if(matched.length > 1)
+  if(matched.length > 1) {
+    highlightCells(matched, 'highlight-same');
+    removeHighlight(matched, 'highlight-peers');
     return false
-  else
+  }
+  else {
+    highlightCells(matched, 'highlight-peers')
+    removeHighlight(matched, 'highlight-same');
     return true;
+  }
+
 }
 
 export function badgeCounter() {
@@ -124,10 +157,41 @@ export function badgeCounter() {
   return digits;
 }
 
+function reset() {
+  const puzzle = state.board;
+
+ makeBoard(puzzle);
+
+}
+
+function check() {
+  const solved = state.solved;
+
+  const inputValues = [];
+
+  for (const square of squares) {
+    inputValues.push(squareValue(square));
+  }
+
+  for (let index = 0; index < inputValues.length; index++) {
+    const input = inputValues[index];
+
+    if(!isNaN(input)) {
+
+      if(input !== parseInt(solved[index])) {
+          colorWrongInput(squares[index]);
+      }
+    }
+  }
+}
+
+function solve() {
+    makeBoard(state.solved);
+}
 
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, loadModal));
-// controlPuzzle();
+
 setupListeners();
 
 

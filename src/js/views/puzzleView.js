@@ -3,6 +3,8 @@ import { findPeers, squares } from '../vendor/sudoku';
 
 export function makeBoard (puzzle) {
 
+  removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares','wrong-input');
+
   for (let index = 0; index < puzzle.length; index++) {
     const squareValue = puzzle[index];
 
