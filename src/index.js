@@ -81,9 +81,7 @@ document.querySelector('.toast-body').textContent = `Game started with ${level} 
 
     //*6 Solve Puzzle
    state.solved =  Object.values(state.puzzle.solvePuzzle());
-   console.log(state.solved);
-
-}
+   }
 
  //? When user enters a value
 function onCellChange(e) {

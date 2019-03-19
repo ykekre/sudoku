@@ -83,8 +83,14 @@ export function highlightCells(cellsArr, clazz) {
 }
 
 export function onCellClicked(e) {
-
-  const cell = e.target.closest('.col-1-of-9').id;
+let cell ='';
+  const clicked = e.target.closest('.col-1-of-9');
+  if(clicked) {
+     cell = clicked.id;
+  }
+  else {
+    return;
+  }
   removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares');
 
   //*1.if cell has some value, calculate same squares from cell value
