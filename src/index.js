@@ -40,6 +40,8 @@ function loadModal() {
 
 $('#levelModal').on('hide.bs.modal', controlPuzzle)
 
+$('.alert').on('close.bs.alert',controlPuzzle );
+
 $('.toast.puzzle-load').on('show.bs.toast', function () {
 
   let level = getLevel();
@@ -56,6 +58,8 @@ document.querySelector('a.undo').addEventListener('click', undo)
 // document.querySelector('.puzzle-reset .toast-body').innerHTML = `Puzzle has been reset`;
 
 });
+
+
 //?Puzzle board related stuff
  function controlPuzzle() {
 
@@ -96,6 +100,11 @@ function onCellChange(e) {
     const value = parseInt(square.value)
     if(checkValidity(value, square.id)) {
       removeColorWrongInput(square.id)
+      if(!currentBoard().includes(NaN) && check()) {
+          document.querySelector('.alert').classList.add('show');
+
+      }
+
     }
 
     //*update badges in numpad
@@ -170,7 +179,8 @@ function undo() {
       document.querySelector(`.unsolved > #${square}`).value = state.currentBoard[index]
     }
   }
-
+  badgeCounter();
+  showBadgeCount();
 }
 
 function currentBoard() {
@@ -197,7 +207,6 @@ function check() {
       }
     }
   }
-
   let count = wrongCells.length
    while(count>0) {
       const pick = wrongCells[Math.floor(Math.random()*(wrongCells.length) )];
@@ -211,6 +220,9 @@ function check() {
         break;
       }
    }
+   if(wrongCells.length=== 0) {
+     return true;
+   } else return false;
 }
 
 function solve() {
@@ -218,8 +230,8 @@ function solve() {
     makeBoard(state.solvedValArray);
     badgeCounter();
     showBadgeCount();
+    console.log(state.solvedValArray);
 }
-
 
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, loadModal));

@@ -1,0 +1,21 @@
+.alert {
+  display: none;
+
+  &.show {
+    background-color: $alert-background;
+    color: $color-modal-text;
+    display: flex;
+    flex-direction: column;
+
+  }
+
+ .btn-level-group .btn.btn-primary.btn-lg {
+
+    background-color:$alert-btn-bg;
+    border-color: $alert-btn-bg;
+    color: $alert-btn-text;
+    font-size: 1.5rem;
+    letter-spacing: 1px;
+}
+}
+

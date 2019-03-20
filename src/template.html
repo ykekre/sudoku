@@ -37,6 +37,17 @@
     </div>
   </div>
 </div>
+<div class="alert alert-success fade alert-dismissible" role="alert">
+  <h4 class="alert-heading">Well done!</h4>
+  <p>You have successfully completed this puzzle</p>
+  <hr>
+  <p class="mb-0">Solve another puzzle?</p>
+  <div class="btn-level-group mx-auto">
+    <button type="button" class="btn btn-primary rounded btn-lg level " data-level='easy' data-dismiss="alert">Easy</button>
+    <button type="button" class="btn btn-primary rounded btn-lg level" data-level='medium' data-dismiss="alert">Medium</button>
+    <button type="button" class="btn btn-primary rounded btn-lg level" data-level='hard' data-dismiss="alert">Hard</button>
+  </div>
+</div>
   <div class="container grid mx-auto ">
       <div class="toast d-flex justify-content-center rounded puzzle-load" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" >
 
@@ -44,7 +55,7 @@
             Hello, world! This is a toast message.
           </div>
       </div>
-      <div class="toast d-flex justify-content-center rounded puzzle-reset" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" data-autohide ="false" >
+      <div class="toast d-flex justify-content-center rounded puzzle-reset" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" >
 
         <div class="toast-body">
           Hello, world! This is a toast message.
@@ -182,7 +193,7 @@
         <li class="list-group-item" id="digit-9"><span class="badge badge-light count-9">0</span>9</li>
        <!--  <li class="list-group-item" id="numpad-draft">Draft</li>
         <li class="list-group-item" id="numpad-color">Color</li> -->
-        <li class="list-group-item" id="numpad-clear">NA</li>
+        <li class="list-group-item" id="numpad-clear">Clear</li>
       </ul>
     </div>
   </div>
