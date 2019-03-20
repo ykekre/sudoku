@@ -30,6 +30,7 @@ function setupListeners() {
     elements.reset.addEventListener('click', reset);
     elements.check.addEventListener('click', check);
     elements.solve.addEventListener('click', solve);
+
   }
 
 //? Load difficulty level modal
@@ -39,19 +40,27 @@ function loadModal() {
 
 $('#levelModal').on('hide.bs.modal', controlPuzzle)
 
-$('.toast').on('show.bs.toast', function () {
+$('.toast.puzzle-load').on('show.bs.toast', function () {
 
   let level = getLevel();
   if(!level) level =  'Easy';
-document.querySelector('.toast-body').textContent = `Game started with ${level} level`;
+document.querySelector('.puzzle-load .toast-body').textContent = `Game started with ${level} level`;
 
 });
 
+$('.toast.puzzle-reset').on('show.bs.toast', function () {
+
+document.querySelector('.puzzle-reset .toast-body').innerHTML = `Puzzle has been reset. <a href="javascript:;" class="undo" role="button">Undo</a>`;
+
+document.querySelector('a.undo').addEventListener('click', undo)
+// document.querySelector('.puzzle-reset .toast-body').innerHTML = `Puzzle has been reset`;
+
+});
 //?Puzzle board related stuff
  function controlPuzzle() {
 
   //*1. Show game started notification
-    $('.toast').toast('show');
+    $('.toast.puzzle-load').toast('show');
 
   //*2. get difficulty level selected by user
     const difficulty = getLevel();
@@ -60,11 +69,11 @@ document.querySelector('.toast-body').textContent = `Game started with ${level} 
     }
     else state.puzzle = new Puzzle('easy');
 
-    state.board =  state.puzzle.setBoard();
+    state.Originalboard =  state.puzzle.setBoard();
 
 
   //*3. Render puzzle board
-    makeBoard(state.board);
+    makeBoard(state.Originalboard);
 
 
   //*4 Calculate numpad badge values
@@ -72,10 +81,10 @@ document.querySelector('.toast-body').textContent = `Game started with ${level} 
     showBadgeCount();
 
   //*5 Parse puzzle array into string
-    state.puzzle.parsePuzzle(state.board);
+    state.puzzle.parsePuzzle(state.Originalboard);
 
   //*6 Solve Puzzle
-    state.solved =  Object.values(state.puzzle.solvePuzzle());
+    state.solvedValArray =  Object.values(state.puzzle.solvePuzzle());
 
 }
 
@@ -144,32 +153,74 @@ export function badgeCounter() {
 }
 
 function reset() {
-  const puzzle = state.board;
+  currentBoard();
+  const puzzle = state.Originalboard;
   makeBoard(puzzle);
+  badgeCounter();
+  showBadgeCount();
+  $('.toast.puzzle-reset').toast('show');
+}
+
+function undo() {
+
+  for (let index = 0; index < squares.length; index++) {
+    const square = squares[index];
+
+    if(!squareValue(square) && state.currentBoard[index]){
+      document.querySelector(`.unsolved > #${square}`).value = state.currentBoard[index]
+    }
+  }
+
+}
+
+function currentBoard() {
+  const current =[]
+  for (const square of squares) {
+    current.push(squareValue(square));
+  }
+  state.currentBoard = current;
+
+  return current;
+
 }
 
 function check() {
-  const solved = state.solved;
-  const inputValues = [];
+  const solved = state.solvedValArray;
+  const cur = currentBoard();
+  const wrongCells = [];
 
-  for (const square of squares) {
-    inputValues.push(squareValue(square));
-  }
-
-  for (let index = 0; index < inputValues.length; index++) {
-    const input = inputValues[index];
-
-    if(!isNaN(input)) {
-      if(input !== parseInt(solved[index])) {
-          colorWrongInput(squares[index]);
+  for (let index = 0; index < cur.length; index++) {
+    const value = cur[index];
+    if(!isNaN(value)) {
+      if(value !== parseInt(solved[index])) {
+        wrongCells.push(squares[index]);
       }
     }
   }
+
+  let count = wrongCells.length
+   while(count>0) {
+      const pick = wrongCells[Math.floor(Math.random()*(wrongCells.length) )];
+
+      if(document.querySelector(`#${pick}`).classList.contains('wrong-input')) {
+        count--;
+        continue;
+      }
+      else {
+        colorWrongInput(pick);
+        break;
+      }
+   }
 }
 
 function solve() {
-    makeBoard(state.solved);
+
+    makeBoard(state.solvedValArray);
+    badgeCounter();
+    showBadgeCount();
 }
+
+
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, loadModal));
 

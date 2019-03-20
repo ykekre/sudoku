@@ -7,6 +7,7 @@ export const elements = {
    'numpad'  : document.querySelector('.numpad'),
    'reset' : document.querySelector('#btn-reset'),
    'check' : document.querySelector('#btn-checkErrors'),
-   'solve' : document.querySelector('#btn-solve')
+   'solve' : document.querySelector('#btn-solve'),
+   'undo' : document.querySelector('.undo')
 }
 

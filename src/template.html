@@ -38,12 +38,18 @@
   </div>
 </div>
   <div class="container grid mx-auto ">
-      <div class="toast d-flex justify-content-center rounded" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" >
+      <div class="toast d-flex justify-content-center rounded puzzle-load" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3000" >
 
           <div class="toast-body">
             Hello, world! This is a toast message.
           </div>
+      </div>
+      <div class="toast d-flex justify-content-center rounded puzzle-reset" role="alert" aria-live="assertive" aria-atomic="true" data-delay="8000" data-autohide ="false" >
+
+        <div class="toast-body">
+          Hello, world! This is a toast message.
         </div>
+    </div>
 
     <div class="board mx-auto  border rounded-lg shadow  ">
 
@@ -63,7 +69,7 @@
               <div>
                   <div class="dropdown-menu" aria-labelledby="settings">
                    <div class="dropdown-item" id="btn-reset" role="button">Reset Progress</div>
-                   <div class="dropdown-item" id="btn-checkErrors" role="button">Check Errors</div>
+                   <div class="dropdown-item" id="btn-checkErrors" role="button">Hint</div>
                    <div class="dropdown-item" id="btn-solve" role="button">Solve Puzzle</div>
                   </div>
               </div>

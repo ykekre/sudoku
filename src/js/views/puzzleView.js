@@ -3,7 +3,7 @@ import { findPeers, squares } from '../vendor/sudoku';
 
 export function makeBoard (puzzle) {
 
-  removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares','wrong-input');
+  removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares','wrong-input', 'solved');
 
   for (let index = 0; index < puzzle.length; index++) {
     const squareValue = puzzle[index];
@@ -133,7 +133,8 @@ export function colorWrongInput(cell) {
   for (const cell of cells) {
     if(cell)
       cell.classList.add('wrong-input');
-  }
+
+      }
 }
 
 export function removeColorWrongInput(cell) {
