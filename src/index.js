@@ -230,7 +230,7 @@ function solve() {
     makeBoard(state.solvedValArray);
     badgeCounter();
     showBadgeCount();
-    console.log(state.solvedValArray);
+
 }
 
 
