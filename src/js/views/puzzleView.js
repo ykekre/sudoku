@@ -1,5 +1,6 @@
 
 import { findPeers, squares } from '../vendor/sudoku';
+import { undo } from '../..';
 
 export function makeBoard (puzzle) {
 
@@ -80,6 +81,7 @@ export function highlightCells(cellsArr, clazz) {
 }
 
 export function onCellClicked(e) {
+
   let cell ='';
   const clicked = e.target.closest('.col-1-of-9');
   if(clicked) {
@@ -159,6 +161,22 @@ export function removeColorWrongInput(cell) {
   highlightCells(sameSquares, 'highlight-same-squares');
   return sameSquares;
 
-
   }
 
+  export function colorRandomError(wrongCells) {
+
+    let count = wrongCells.length
+    while(count>0) {
+       const pick = wrongCells[Math.floor(Math.random()*(wrongCells.length) )];
+
+       if(document.querySelector(`#${pick}`).classList.contains('wrong-input')) {
+         count--;
+         continue;
+       }
+       else {
+         colorWrongInput(pick);
+         break;
+       }
+    }
+
+  }

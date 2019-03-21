@@ -74,8 +74,8 @@ export default class Puzzle {
     return this.board;
   }
 
-  parsePuzzle(puzzle) {
-    this.puzzleString =  puzzle.map( cell =>  (isNull(cell))? 0 : cell ).join('');
+  parsePuzzle() {
+    this.puzzleString =  this.board.map( cell =>  (isNull(cell))? 0 : cell ).join('');
 
    }
 

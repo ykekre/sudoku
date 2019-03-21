@@ -1,13 +1,14 @@
 import "./main.scss";
 import {elements} from './js/views/base';
 import Puzzle from './js/models/Puzzle';
-import {setLevel, getLevel } from './js/views/modalView';
-import {makeBoard, highlightCells, onCellClicked, colorWrongInput, removeColorWrongInput, squareValue, removeHighlight} from './js/views/puzzleView';
 import { findPeers, squares } from './js/vendor/sudoku';
+import {loadModal, setLevel, getLevel, showWinAlert } from './js/views/modalView';
+import {makeBoard, highlightCells, onCellClicked, removeColorWrongInput, squareValue, removeHighlight, colorRandomError} from './js/views/puzzleView';
 import { showBadgeCount } from "./js/views/numpadView";
 
 //?Keep track of game state: Puzzle
 const state = {};
+
 
 
 function setupListeners() {
@@ -30,38 +31,12 @@ function setupListeners() {
     elements.reset.addEventListener('click', reset);
     elements.check.addEventListener('click', check);
     elements.solve.addEventListener('click', solve);
-
-  }
-
-//? Load difficulty level modal
-function loadModal() {
-  $('#levelModal').modal();
 }
-
-$('#levelModal').on('hide.bs.modal', controlPuzzle)
-
-$('.alert').on('close.bs.alert',controlPuzzle );
-
-$('.toast.puzzle-load').on('show.bs.toast', function () {
-
-  let level = getLevel();
-  if(!level) level =  'Easy';
-document.querySelector('.puzzle-load .toast-body').textContent = `Game started with ${level} level`;
-
-});
-
-$('.toast.puzzle-reset').on('show.bs.toast', function () {
-
-document.querySelector('.puzzle-reset .toast-body').innerHTML = `Puzzle has been reset. <a href="javascript:;" class="undo" role="button">Undo</a>`;
-
-document.querySelector('a.undo').addEventListener('click', undo)
-// document.querySelector('.puzzle-reset .toast-body').innerHTML = `Puzzle has been reset`;
-
-});
 
 
 //?Puzzle board related stuff
- function controlPuzzle() {
+ export function controlPuzzle() {
+
 
   //*1. Show game started notification
     $('.toast.puzzle-load').toast('show');
@@ -75,41 +50,43 @@ document.querySelector('a.undo').addEventListener('click', undo)
 
     state.Originalboard =  state.puzzle.setBoard();
 
-
   //*3. Render puzzle board
     makeBoard(state.Originalboard);
-
 
   //*4 Calculate numpad badge values
     badgeCounter();
     showBadgeCount();
 
   //*5 Parse puzzle array into string
-    state.puzzle.parsePuzzle(state.Originalboard);
+    state.puzzle.parsePuzzle();
 
   //*6 Solve Puzzle
     state.solvedValArray =  Object.values(state.puzzle.solvePuzzle());
 
 }
 
+
 //? When user enters a value
 function onCellChange(e) {
+
   const square = e.target.closest('div.unsolved > input');
 
   if(square) {
     const value = parseInt(square.value)
     if(checkValidity(value, square.id)) {
       removeColorWrongInput(square.id)
+
+      //*Check if puzzle completed - if yes show win alert
       if(!currentBoard().includes(NaN) && check()) {
-          document.querySelector('.alert').classList.add('show');
+        onWin();
 
       }
-
     }
 
     //*update badges in numpad
     badgeCounter();
     showBadgeCount();
+    currentBoard();
   }
 }
 
@@ -170,8 +147,7 @@ function reset() {
   $('.toast.puzzle-reset').toast('show');
 }
 
-function undo() {
-
+export function undo() {
   for (let index = 0; index < squares.length; index++) {
     const square = squares[index];
 
@@ -183,6 +159,7 @@ function undo() {
   showBadgeCount();
 }
 
+//*Calculate current state of the board
 function currentBoard() {
   const current =[]
   for (const square of squares) {
@@ -194,6 +171,8 @@ function currentBoard() {
 
 }
 
+
+//? Check errors and give hints to user
 function check() {
   const solved = state.solvedValArray;
   const cur = currentBoard();
@@ -207,32 +186,47 @@ function check() {
       }
     }
   }
-  let count = wrongCells.length
-   while(count>0) {
-      const pick = wrongCells[Math.floor(Math.random()*(wrongCells.length) )];
-
-      if(document.querySelector(`#${pick}`).classList.contains('wrong-input')) {
-        count--;
-        continue;
-      }
-      else {
-        colorWrongInput(pick);
-        break;
-      }
-   }
    if(wrongCells.length=== 0) {
      return true;
-   } else return false;
+   } else {
+
+    colorRandomError(wrongCells);
+    return false;
+   }
 }
 
 function solve() {
 
-    makeBoard(state.solvedValArray);
-    badgeCounter();
-    showBadgeCount();
+  bootbox.confirm({
+    message: "Are you sure you want to solve the entire puzzle?",
+    buttons: {
+        confirm: {
+            label: 'Yes',
+            className: 'btn-success'
+        },
+        cancel: {
+            label: 'No',
+            className: 'btn-danger'
+        }
+    },
+    callback: function (result) {
+        if(result) {
+          currentBoard();
+          makeBoard(state.solvedValArray);
+          badgeCounter();
+          showBadgeCount();
+
+        }
+    }
+});
 
 }
 
+function onWin() {
+
+  showWinAlert();
+
+}
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, loadModal));
 

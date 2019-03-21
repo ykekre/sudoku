@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/ykekre/sudoku#readme",
   "dependencies": {
-    "axios": "^0.18.0",
     "clean-webpack-plugin": "^2.0.0",
     "express": "^4.16.4",
     "sudoku": "0.0.2"
