@@ -10,6 +10,7 @@
   .modal-body {
 
     width: 100%;
+
     p {
       text-align: center;
 
@@ -22,16 +23,24 @@
 
       .btn-lg {
         font-size: 1.7rem;
-        width:24%;
+        width: 24%;
         align-self: center;
         background-color: $color-modal-buttons;
         color: $color-modal-btn-text;
-         border-color:  none;
+        border-color: $color-modal-buttons;
+
+        &:hover {
+          background-color: #e9dcbe;
+        }
+
+        &:active {
+          background-color: #ccab65;
+        }
+      }
+
     }
 
   }
-
-}
 
 }
 
@@ -41,12 +50,12 @@
   left: 50%;
   transform: translateX(-50%);
 
-  .modal-content{
+  .modal-content {
     background-color: $color-modal-background;
     color: $color-modal-text;
     font-family: 'Pacifico', cursive;
-      letter-spacing: 1.3px;
-      color: $color-modal-text;
+    letter-spacing: 1.3px;
+    color: $color-modal-text;
   }
 
 

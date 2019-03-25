@@ -1,4 +1,3 @@
-
 //* Main Back ground colors
 $color-light-1: #fffce5;
 
@@ -6,19 +5,19 @@ $color-light-1: #fffce5;
 $color-modal-background : #fae5b8d3;
 $color-modal-text: #4c3b78cc;
 
-$color-modal-buttons: rgba(212, 185, 126, 0.89);
+$color-modal-buttons: #d4b97ee3;
 $color-modal-btn-text : #736697;
 
 //* Board Colors
 $color-board-sharp: #EFF3EA;
-$color-number: rgba(212, 185, 126, 0.904);
- $color-input-number: #4c3b78cc;
+$color-number: #d4b97ee7;
+$color-input-number: #4c3b78cc;
 
 $color-wrong-input: #e15f41;
 
 //*Board highlights
 // $highlight-clicked: #e3c5d0;
-$highlight-clicked: rgba(220, 210, 151, 0.904);
+$highlight-clicked: #dcd297e7;
 
 
 
@@ -33,5 +32,7 @@ $alert-btn-bg: #BACD86;
 $alert-btn-text: #F9FCF3;
 
 //*Fonts
-$numbers : 'Arvo', serif;
-$font-modal: 'Playfair Display', serif;
+$numbers : 'Arvo',
+serif;
+$font-modal: 'Playfair Display',
+serif;

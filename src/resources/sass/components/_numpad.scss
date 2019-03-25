@@ -1,7 +1,10 @@
 .numpad {
-  width: 70vh;
-  height: 14vh;
 
+  // width: 70vh;
+  // height: 14vh;
+  &.halffade {
+    opacity: 0.5;
+  }
 
   .list-group-item {
     position: relative;
@@ -10,13 +13,45 @@
     background-color: $color-light-1;
     font-family: $numbers;
     font-size: 2rem;
+    cursor: pointer;
+    color: $color-input-number;
+    font-weight: 700;
 
+    &:hover {
+      background-color: $color-board-sharp;
+      outline-color: $color-board-sharp;
+      border-color: $color-board-sharp;
 
-   span.badge {
+      span.badge {
+
+        background-color: $color-board-sharp;
+        color: $color-number;
+
+      }
+    }
+
+    &:active {
+      background-color: #dfe7d4;
+      outline-color: #dfe7d4;
+      border-color: #dfe7d4;
+
+      span.badge {
+
+        background-color: #dfe7d4;
+        color: $color-number;
+
+      }
+
+    }
+
+    span.badge {
       position: absolute;
       top: 1px;
       right: 1px;
-      background-color: $color-board-sharp;
+      background-color: $color-light-1;
+      color: $color-number;
+
+
     }
   }
 
