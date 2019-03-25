@@ -12,7 +12,7 @@ import {
 
 export function makeBoard(puzzle) {
 
-  removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares', 'wrong-input', 'solved');
+  removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares', 'wrong-input', 'solved', 'unsolved');
 
   for (let index = 0; index < puzzle.length; index++) {
     const squareValue = puzzle[index];
@@ -193,5 +193,13 @@ export function colorRandomError(wrongCells) {
       break;
     }
   }
+
+}
+
+export function disable(id) {
+
+  document.querySelector(`#${id}`).setAttribute('disabled', '');
+  document.querySelector(`#${id}`).classList.add('disabled');
+
 
 }

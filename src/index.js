@@ -21,7 +21,8 @@ import {
   removeColorWrongInput,
   squareValue,
   removeHighlight,
-  colorRandomError
+  colorRandomError,
+  disable
 } from './js/views/puzzleView';
 import {
   showBadgeCount,
@@ -53,6 +54,7 @@ function setupListeners() {
   elements.board.addEventListener('input', onCellChange)
 
   //*3 Settings button listeners
+  elements.newGame.addEventListener('click', newGame);
   elements.reset.addEventListener('click', reset);
   elements.check.addEventListener('click', check);
   elements.solve.addEventListener('click', solve);
@@ -90,6 +92,29 @@ export function controlPuzzle() {
 
   //*6 Solve Puzzle
   state.solvedValArray = Object.values(state.puzzle.solvePuzzle());
+
+}
+
+function newGame() {
+  bootbox.confirm({
+    message: "Are you sure you want to start a new game?",
+    buttons: {
+      confirm: {
+        label: 'Yes',
+        className: 'btn-success'
+      },
+      cancel: {
+        label: 'No',
+        className: 'btn-danger'
+      }
+    },
+    callback: function (result) {
+      if (result) {
+        loadModal();
+
+      }
+    }
+  });
 
 }
 
@@ -238,7 +263,7 @@ function check() {
 function solve() {
 
   bootbox.confirm({
-    message: "Are you sure you want to solve the entire puzzle?",
+    message: "Are you sure you want to solve the entire puzzle? This will end the game.",
     buttons: {
       confirm: {
         label: 'Yes',
@@ -255,6 +280,7 @@ function solve() {
         makeBoard(state.solvedValArray);
         badgeCounter();
         showBadgeCount();
+        disable('btn-reset');
 
       }
     }
