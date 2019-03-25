@@ -4,11 +4,43 @@
   left: 1px; */
   background-color: rgba(250, 229, 184, 0.479);
   font-family: 'Pacifico', cursive;
-    // text-transform: uppercase;
-    font-style: italic;
+  // text-transform: uppercase;
+  font-style: italic;
   font-size: 1.7rem;
-    font-weight: 700;
-    letter-spacing: 1.2px;
-    color: $color-modal-text;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: $color-modal-text;
+
+}
+
+.github {
+  font-size: 1em;
+  font-family: 'Josefin Sans', sans-serif;
+  // font-style: italic;
+  font-weight: 700;
+
+  // color: $color-modal-text;
+  i.fas {
+    color: $color-input-number;
+
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a.repo-link {
+    color: #988fb2;
+    text-align: center;
+    text-decoration: underline;
+
+    &:hover,
+    &:active {
+
+      color: $color-input-number;
+
+    }
+  }
+
 
 }

@@ -6,11 +6,12 @@
   font-size: 2rem;
 
   .modal-header {
-    font-family: 'Raleway', sans-serif;
-    font-weight: 800;
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
     color: $color-modal-text;
   }
-  .modal-body{
+
+  .modal-body {
     font-family: 'Pacifico', cursive;
     // text-transform: uppercase;
     font-style: italic;
@@ -27,13 +28,13 @@
   font-style: italic;
   font-weight: 700;
   letter-spacing: 1.2px;
-font-size: 1.3rem;
-color: $color-modal-text;
+  font-size: 1.3rem;
+  color: $color-modal-text;
 }
 
 .alert {
   font-family: 'Pacifico', cursive;
-    letter-spacing: 1px;
-    color: $color-modal-text;
+  letter-spacing: 1px;
+  color: $color-modal-text;
 
 }
