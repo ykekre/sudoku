@@ -46,7 +46,8 @@ export function makeBoard (puzzle) {
       square.classList.add('solved');
     }
     else {
-      square.innerHTML = inputMarkup(row, index)
+       square.innerHTML = inputMarkup(row, index)
+
     }
   }
 }
@@ -62,9 +63,9 @@ export function squareValue(cell) {
   }
 }
 
-function inputMarkup(row, index) {
+ function inputMarkup(row, index) {
   const markup = `<div class="unsolved">
-                    <input type="text" id="${row}${index+1}" value = "" onkeypress='return event.charCode >= 49 && event.charCode <= 57' pattern="[1-9]" maxlength="1" >
+                    <input type="number" id="${row}${index+1}" value = "" onkeypress='return event.charCode >= 49 && event.charCode <= 57' pattern="[1-9]" maxlength="1" >
                   </div>`
 
   return markup;
