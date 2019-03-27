@@ -32,7 +32,7 @@ export function getLevel() {
 }
 
 // //? Show puzzle on modal hide
-// $('#levelModal').on('hide.bs.modal', controlPuzzle)
+$('#levelModal').on('hide.bs.modal', controlPuzzle)
 
 //  //?Show new puzzle after restart game
 //  $('.alert').on('close.bs.alert',controlPuzzle );

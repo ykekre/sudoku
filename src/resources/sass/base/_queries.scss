@@ -1,11 +1,28 @@
 /* tablets with large height */
+@media only screen and (max-width: 800px) {
+
+  /* .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } */
+
+  .numpad {
+
+    .numpad-item {
+      width: 12vh;
+      font-size: 1.6rem;
+    }
+  }
+}
+
+/* tablets with large height */
 @media only screen and (min-height: 940px) {
-  .grid .board {
+  .container .grid {
     height: 54vh;
     width: 54vh;
 
-
-    .grid-row .col-1-of-9 {
+    &-row .col-1-of-9 {
 
       font-size: 1.7rem;
     }
@@ -13,9 +30,7 @@
 
   .numpad {
 
-
-
-    .list-group-item {
+    &-item {
       width: 11vh;
       font-size: 1.7rem;
     }
@@ -30,7 +45,7 @@
     }
   }
 
-  .dropdown-menu a {
+  .settings-menu a {
     letter-spacing: 1.2px;
     font-size: 1.2rem;
 
@@ -41,7 +56,7 @@
 /* Small phones to small tablets: */
 @media only screen and (max-width: 576px) {
 
-  .grid .board {
+  .container .grid {
     height: 45vh;
     width: 45vh;
 
@@ -57,7 +72,7 @@
     // width: 50vh;
     height: 10vh;
 
-    .list-group-item {
+    .numpad-item {
       width: 10vh;
       font-size: 1.6rem;
     }
@@ -76,12 +91,17 @@
     }
   }
 
-  .dropdown-menu a {
+  .settings-menu a {
     letter-spacing: 1.1px;
     font-size: 1.1rem;
   }
 
-  .dropdown-item {
+  .settings-item {
     padding: .25rem 0.8rem;
+  }
+
+  .toast {
+    font-size: 1.2rem;
+    letter-spacing: 0.75px;
   }
 }

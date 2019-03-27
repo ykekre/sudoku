@@ -46,12 +46,12 @@ function setupListeners() {
 
   //*2. Board cell listeners
   //!When user clicks on a cell
-  elements.board.addEventListener('click', onCellClicked)
+  elements.grid.addEventListener('click', onCellClicked)
 
 
   //! When user enters value in any cell
-  elements.board.addEventListener('beforeinput', onCellClicked)
-  elements.board.addEventListener('input', onCellChange)
+  elements.grid.addEventListener('beforeinput', onCellClicked)
+  elements.grid.addEventListener('input', onCellChange)
 
   //*3 Settings button listeners
   elements.newGame.addEventListener('click', newGame);
@@ -78,10 +78,10 @@ export function controlPuzzle() {
     state.puzzle = new Puzzle(difficulty);
   } else state.puzzle = new Puzzle('easy');
 
-  state.Originalboard = state.puzzle.setBoard();
+  state.puzzle.setBoard();
 
   //*3. Render puzzle board
-  makeBoard(state.Originalboard);
+  makeBoard(state.puzzle.board);
 
   //*4 Calculate numpad badge values
   badgeCounter();
@@ -205,8 +205,8 @@ export function badgeCounter() {
 
 function reset() {
   currentBoard();
-  const puzzle = state.Originalboard;
-  makeBoard(puzzle);
+
+  makeBoard(state.puzzle.board);
   badgeCounter();
   showBadgeCount();
   $('.toast.puzzle-reset').toast('show');

@@ -2,39 +2,110 @@
   font-family: 'Arvo', serif;
 }
 
-#levelModal .modal-content {
+.grid-col {
+  font-family: $numbers;
+  font-weight: 700;
+  color: $color-number;
   font-size: 2rem;
 
-  .modal-header {
-    font-family: 'Josefin Sans', sans-serif;
-    font-weight: 700;
-    color: $color-modal-text;
+  &.unsolved {
+    color: $color-input-number;
+
+    &.wrong-input {
+      color: $color-wrong-input;
+    }
   }
 
-  .modal-body {
-    font-family: 'Pacifico', cursive;
-    // text-transform: uppercase;
-    font-style: italic;
-    font-weight: 700;
-    letter-spacing: 1.5px;
-    color: $color-modal-text;
-  }
 
 }
 
-.dropdown-item {
-  font-family: 'Pacifico', cursive;
-  // text-transform: uppercase;
-  font-style: italic;
+#levelModal .modal-content {
+  font-size: 2rem;
+
+  .modal-header h2 {
+    font-family: 'Josefin Sans', sans-serif;
+    font-weight: 700;
+    color: $color-modal-text;
+
+  }
+
+  .modal-body p {
+    font-family: 'Josefin Sans', sans-serif;
+    color: $color-modal-text;
+  }
+
+  .btn-level-group {
+    font-family: 'Pacifico', cursive;
+    font-style: italic;
+    font-weight: 700;
+    // letter-spacing: 1.5px;
+  }
+}
+
+.settings-item {
+  font-family: 'Josefin Sans', sans-serif;
   font-weight: 700;
-  letter-spacing: 1.2px;
+  letter-spacing: 0.35px;
   font-size: 1.3rem;
   color: $color-modal-text;
+
 }
 
 .alert {
   font-family: 'Pacifico', cursive;
   letter-spacing: 1px;
   color: $color-modal-text;
+
+}
+
+
+.bootbox.modal .modal-dialog .modal-content {
+  background-color: $color-modal-background;
+  color: $color-modal-text;
+  font-family: 'Pacifico', cursive;
+  letter-spacing: 1.3px;
+  color: $color-modal-text;
+
+  .modal-footer {
+    font-family: 'Josefin Sans', sans-serif;
+  }
+}
+
+.toast {
+  font-family: 'Pacifico', cursive;
+  font-style: italic;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  color: $color-modal-text;
+}
+
+.footer {
+
+  font-size: 1em;
+  font-family: 'Permanent Marker', cursive;
+
+
+  &-icon {
+    color: $footer-body;
+
+  }
+
+  &-repo-link {
+    color: lighten($footer-body, 20%);
+    text-align: center;
+    text-decoration: none;
+
+    &:hover {
+      color: $footer-body;
+      text-decoration: none;
+    }
+
+    &:active {
+      text-decoration: none;
+      color: darken($footer-body, 20%);
+
+    }
+  }
 
 }

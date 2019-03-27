@@ -6,7 +6,7 @@
     opacity: 0.5;
   }
 
-  .list-group-item {
+  .numpad-item {
     position: relative;
     width: 14vh;
     text-align: center;
@@ -51,9 +51,7 @@
       background-color: $color-light-1;
       color: $color-number;
 
-
     }
   }
-
 
 }

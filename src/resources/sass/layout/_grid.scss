@@ -1,0 +1,88 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+
+  .grid {
+
+    height: 63vh;
+    width: 63vh;
+
+    &-row {
+      height: 11.111%;
+      width: 100%;
+      display: flex;
+      position: relative;
+
+      .settings {
+        width: 5vh;
+        height: 5vh;
+        position: absolute;
+        top: -3.5vh;
+        right: -3.5vh;
+        fill: $color-number;
+
+        &-menu {
+          background-color: rgba($color-modal-background, 0.478);
+
+        }
+
+        &-item {
+          cursor: pointer;
+
+          &[disabled] {
+            opacity: 0.7;
+            cursor: not-allowed;
+          }
+        }
+      }
+
+    }
+
+    &-col {
+      width: 11.1%;
+      height: 100%;
+      padding: 0.5rem;
+      text-align: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      // background-color: $color-board-bg;
+
+      &.highlight-peers {
+        background-color: $highlight-peers !important;
+      }
+
+      &.highlight-clicked {
+        background-color: $highlight-clicked !important;
+      }
+
+      &.highlight-same-squares {
+        background-color: $highlight-same-squares !important;
+      }
+
+      &.highlight-same {
+        background-color: $highlight-same !important;
+      }
+
+      &.solved {
+        cursor: default;
+      }
+
+      &.unsolved {
+
+        cursor: text;
+
+      }
+    }
+
+    .board-sharp {
+      background-color: $color-board-sharp;
+
+    }
+
+  }
+}

@@ -1,10 +1,9 @@
 export const elements = {
-  'board': document.querySelector('.board'),
+  'grid': document.querySelector('.grid'),
   'level': document.querySelectorAll('.level'),
   'alert-container': document.querySelector('#alert-container'),
   'squares': document.querySelectorAll('div.unsolved > input'),
-  'board': document.querySelector('.board'),
-  'grid': document.querySelector('.grid'),
+  'container': document.querySelector('.container'),
   'numpad': document.querySelector('.numpad'),
   'reset': document.querySelector('#btn-reset'),
   'check': document.querySelector('#btn-checkErrors'),

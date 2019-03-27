@@ -1,13 +1,15 @@
-import {badgeCounter as digitsMap} from '../../index';
+import {
+  badgeCounter as digitsMap
+} from '../../index';
 
 let clickedNumpad = 0;
 export function showBadgeCount() {
 
   for (let index = 1; index < 10; index++) {
 
-const digits = digitsMap();
+    const digits = digitsMap();
 
-document.querySelector(`.count-${index}`).textContent= digits.get(index);
+    document.querySelector(`.count-${index}`).textContent = digits.get(index);
 
   }
 }
@@ -15,16 +17,16 @@ document.querySelector(`.count-${index}`).textContent= digits.get(index);
 
 export function setNumpadValue(e) {
 
-  const cell = e.target.closest('.list-group-item');
+  const cell = e.target.closest('.numpad-item');
 
-    if(cell.id !== 'numpad-clear') {
+  if (cell.id !== 'numpad-clear') {
 
-      clickedNumpad = parseInt(cell.textContent.charAt(1));
+    clickedNumpad = parseInt(cell.textContent.charAt(1));
 
-    } else {
+  } else {
 
-      clickedNumpad = 'clear';
-    }
+    clickedNumpad = 'clear';
+  }
 }
 
 export function getNumpadValue() {

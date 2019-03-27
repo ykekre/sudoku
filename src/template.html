@@ -9,6 +9,7 @@
   <link href="https://fonts.googleapis.com/css?family=Arvo:400,700" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:400,600,700" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker" rel="stylesheet">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
@@ -49,47 +50,45 @@
   <div class="alert-container" id="alert-container">
 
   </div>
-  <div class="container grid mx-auto ">
+  <div class="container  mx-auto ">
 
-    <div class="toast d-flex justify-content-center rounded puzzle-load" role="alert" aria-live="assertive"
-      aria-atomic="true" data-delay="5000">
-
-      <div class="toast-body">
-        Hello, world! This is a toast message.
-      </div>
-    </div>
-    <div class="toast d-flex justify-content-center rounded puzzle-reset" role="alert" aria-live="assertive"
-      aria-atomic="true" data-delay="8000">
+    <div class="toast rounded puzzle-load" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
 
       <div class="toast-body">
         Hello, world! This is a toast message.
       </div>
     </div>
+    <div class="toast rounded puzzle-reset" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
 
-    <div class="board mx-auto rounded-lg shadow  ">
+      <div class="toast-body">
+        Hello, world! This is a toast message.
+      </div>
+    </div>
+
+    <div class="grid mx-auto rounded-lg shadow  ">
 
       <div class="grid-row ">
-        <div class="col-1-of-9 border rounded-sm A1" id="A1"> </div>
-        <div class="col-1-of-9 border rounded-sm A2" id="A2">
+        <div class="grid-col col-1-of-9 border rounded-sm A1" id="A1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A2" id="A2">
         </div>
-        <div class="col-1-of-9 border rounded-sm A3" id="A3"> </div>
-        <div class="col-1-of-9 border rounded-sm A4  board-sharp" id="A4"> </div>
-        <div class="col-1-of-9 border rounded-sm A5  board-sharp" id="A5"> </div>
-        <div class="col-1-of-9 border rounded-sm A6  board-sharp" id="A6"> </div>
-        <div class="col-1-of-9 border rounded-sm A7" id="A7"> </div>
-        <div class="col-1-of-9 border rounded-sm A8" id="A8"> </div>
-        <div class="col-1-of-9 border rounded-sm A9" id="A9"> </div>
-        <div class=" dropright">
-          <svg class=" dropdown dropdown-toggle" type="button" id="settings" data-toggle="dropdown" aria-haspopup="true"
-            aria-expanded="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <div class="grid-col col-1-of-9 border rounded-sm A3" id="A3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A4  board-sharp" id="A4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A5  board-sharp" id="A5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A6  board-sharp" id="A6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A7" id="A7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A8" id="A8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm A9" id="A9"> </div>
+        <div class="settings dropright">
+          <svg class="settings-icon dropdown dropdown-toggle" type="button" id="settings" data-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
             <path
               d="M413.967 276.8c1.06-6.235 1.06-13.518 1.06-20.8s-1.06-13.518-1.06-20.8l44.667-34.318c4.26-3.118 5.319-8.317 2.13-13.518L418.215 115.6c-2.129-4.164-8.507-6.235-12.767-4.164l-53.186 20.801c-10.638-8.318-23.394-15.601-36.16-20.801l-7.448-55.117c-1.06-4.154-5.319-8.318-10.638-8.318h-85.098c-5.318 0-9.577 4.164-10.637 8.318l-8.508 55.117c-12.767 5.2-24.464 12.482-36.171 20.801l-53.186-20.801c-5.319-2.071-10.638 0-12.767 4.164L49.1 187.365c-2.119 4.153-1.061 10.399 2.129 13.518L96.97 235.2c0 7.282-1.06 13.518-1.06 20.8s1.06 13.518 1.06 20.8l-44.668 34.318c-4.26 3.118-5.318 8.317-2.13 13.518L92.721 396.4c2.13 4.164 8.508 6.235 12.767 4.164l53.187-20.801c10.637 8.318 23.394 15.601 36.16 20.801l8.508 55.117c1.069 5.2 5.318 8.318 10.637 8.318h85.098c5.319 0 9.578-4.164 10.638-8.318l8.518-55.117c12.757-5.2 24.464-12.482 36.16-20.801l53.187 20.801c5.318 2.071 10.637 0 12.767-4.164l42.549-71.765c2.129-4.153 1.06-10.399-2.13-13.518l-46.8-34.317zm-158.499 52c-41.489 0-74.46-32.235-74.46-72.8s32.971-72.8 74.46-72.8 74.461 32.235 74.461 72.8-32.972 72.8-74.461 72.8z" />
             <div>
-              <div class="dropdown-menu" aria-labelledby="settings">
-                <div class="dropdown-item" id="btn-newGame" role="button">New Game</div>
-                <div class="dropdown-item" id="btn-reset" role="button">Reset Progress</div>
-                <div class="dropdown-item" id="btn-checkErrors" role="button">Hint</div>
-                <div class="dropdown-item" id="btn-solve" role="button">Solve Puzzle</div>
+              <div class="settings-menu dropdown-menu" aria-labelledby="settings">
+                <div class="settings-item dropdown-item" id="btn-newGame" role="button">New Puzzle</div>
+                <div class="settings-item dropdown-item" id="btn-reset" role="button">Reset Puzzle</div>
+                <div class="settings-item dropdown-item" id="btn-solve" role="button">Solve Puzzle</div>
+                <div class="settings-item dropdown-item" id="btn-checkErrors" role="button">Hint</div>
 
               </div>
             </div>
@@ -98,119 +97,119 @@
       </div>
 
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm B1" id="B1"> </div>
-        <div class="col-1-of-9 border rounded-sm B2" id="B2"> </div>
-        <div class="col-1-of-9 border rounded-sm B3" id="B3"> </div>
-        <div class="col-1-of-9 border rounded-sm B4  board-sharp" id="B4"> </div>
-        <div class="col-1-of-9 border rounded-sm B5  board-sharp" id="B5"> </div>
-        <div class="col-1-of-9 border rounded-sm B6  board-sharp" id="B6"> </div>
-        <div class="col-1-of-9 border rounded-sm B7" id="B7"> </div>
-        <div class="col-1-of-9 border rounded-sm B8" id="B8"> </div>
-        <div class="col-1-of-9 border rounded-sm B9" id="B9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B1" id="B1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B2" id="B2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B3" id="B3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B4  board-sharp" id="B4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B5  board-sharp" id="B5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B6  board-sharp" id="B6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B7" id="B7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B8" id="B8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm B9" id="B9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm C1" id="C1"> </div>
-        <div class="col-1-of-9 border rounded-sm C2" id="C2"> </div>
-        <div class="col-1-of-9 border rounded-sm C3" id="C3"> </div>
-        <div class="col-1-of-9 border rounded-sm C4  board-sharp" id="C4"> </div>
-        <div class="col-1-of-9 border rounded-sm C5  board-sharp" id="C5"> </div>
-        <div class="col-1-of-9 border rounded-sm C6  board-sharp" id="C6"> </div>
-        <div class="col-1-of-9 border rounded-sm C7" id="C7"> </div>
-        <div class="col-1-of-9 border rounded-sm C8" id="C8"> </div>
-        <div class="col-1-of-9 border rounded-sm C9" id="C9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C1" id="C1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C2" id="C2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C3" id="C3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C4  board-sharp" id="C4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C5  board-sharp" id="C5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C6  board-sharp" id="C6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C7" id="C7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C8" id="C8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm C9" id="C9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm D1 board-sharp" id="D1"> </div>
-        <div class="col-1-of-9 border rounded-sm D2 board-sharp" id="D2"> </div>
-        <div class="col-1-of-9 border rounded-sm D3 board-sharp" id="D3"> </div>
-        <div class="col-1-of-9 border rounded-sm D4" id="D4"> </div>
-        <div class="col-1-of-9 border rounded-sm D5" id="D5"> </div>
-        <div class="col-1-of-9 border rounded-sm D6" id="D6"> </div>
-        <div class="col-1-of-9 border rounded-sm D7 board-sharp" id="D7"> </div>
-        <div class="col-1-of-9 border rounded-sm D8 board-sharp" id="D8"> </div>
-        <div class="col-1-of-9 border rounded-sm D9 board-sharp" id="D9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D1 board-sharp" id="D1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D2 board-sharp" id="D2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D3 board-sharp" id="D3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D4" id="D4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D5" id="D5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D6" id="D6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D7 board-sharp" id="D7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D8 board-sharp" id="D8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm D9 board-sharp" id="D9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm E1 board-sharp" id="E1"> </div>
-        <div class="col-1-of-9 border rounded-sm E2 board-sharp" id="E2"> </div>
-        <div class="col-1-of-9 border rounded-sm E3 board-sharp" id="E3"> </div>
-        <div class="col-1-of-9 border rounded-sm E4  " id="E4"> </div>
-        <div class="col-1-of-9 border rounded-sm E5  " id="E5"> </div>
-        <div class="col-1-of-9 border rounded-sm E6  " id="E6"> </div>
-        <div class="col-1-of-9 border rounded-sm E7 board-sharp" id="E7"> </div>
-        <div class="col-1-of-9 border rounded-sm E8 board-sharp" id="E8"> </div>
-        <div class="col-1-of-9 border rounded-sm E9 board-sharp" id="E9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E1 board-sharp" id="E1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E2 board-sharp" id="E2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E3 board-sharp" id="E3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E4  " id="E4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E5  " id="E5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E6  " id="E6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E7 board-sharp" id="E7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E8 board-sharp" id="E8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm E9 board-sharp" id="E9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm F1 board-sharp" id="F1"> </div>
-        <div class="col-1-of-9 border rounded-sm F2 board-sharp" id="F2"> </div>
-        <div class="col-1-of-9 border rounded-sm F3 board-sharp" id="F3"> </div>
-        <div class="col-1-of-9 border rounded-sm F4 " id="F4"> </div>
-        <div class="col-1-of-9 border rounded-sm F5 " id="F5"> </div>
-        <div class="col-1-of-9 border rounded-sm F6 " id="F6"> </div>
-        <div class="col-1-of-9 border rounded-sm F7 board-sharp" id="F7"> </div>
-        <div class="col-1-of-9 border rounded-sm F8 board-sharp" id="F8"> </div>
-        <div class="col-1-of-9 border rounded-sm F9 board-sharp" id="F9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F1 board-sharp" id="F1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F2 board-sharp" id="F2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F3 board-sharp" id="F3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F4 " id="F4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F5 " id="F5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F6 " id="F6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F7 board-sharp" id="F7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F8 board-sharp" id="F8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm F9 board-sharp" id="F9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm G1" id="G1"> </div>
-        <div class="col-1-of-9 border rounded-sm G2" id="G2"> </div>
-        <div class="col-1-of-9 border rounded-sm G3" id="G3"> </div>
-        <div class="col-1-of-9 border rounded-sm G4 board-sharp" id="G4"> </div>
-        <div class="col-1-of-9 border rounded-sm G5 board-sharp" id="G5"> </div>
-        <div class="col-1-of-9 border rounded-sm G6 board-sharp" id="G6"> </div>
-        <div class="col-1-of-9 border rounded-sm G7" id="G7"> </div>
-        <div class="col-1-of-9 border rounded-sm G8" id="G8"> </div>
-        <div class="col-1-of-9 border rounded-sm G9" id="G9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G1" id="G1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G2" id="G2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G3" id="G3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G4 board-sharp" id="G4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G5 board-sharp" id="G5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G6 board-sharp" id="G6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G7" id="G7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G8" id="G8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm G9" id="G9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm H1" id="H1"> </div>
-        <div class="col-1-of-9 border rounded-sm H2" id="H2"> </div>
-        <div class="col-1-of-9 border rounded-sm H3" id="H3"> </div>
-        <div class="col-1-of-9 border rounded-sm H4 board-sharp" id="H4"> </div>
-        <div class="col-1-of-9 border rounded-sm H5 board-sharp" id="H5"> </div>
-        <div class="col-1-of-9 border rounded-sm H6 board-sharp" id="H6"> </div>
-        <div class="col-1-of-9 border rounded-sm H7" id="H7"> </div>
-        <div class="col-1-of-9 border rounded-sm H8" id="H8"> </div>
-        <div class="col-1-of-9 border rounded-sm H9" id="H9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H1" id="H1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H2" id="H2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H3" id="H3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H4 board-sharp" id="H4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H5 board-sharp" id="H5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H6 board-sharp" id="H6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H7" id="H7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H8" id="H8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm H9" id="H9"> </div>
       </div>
       <div class="grid-row">
-        <div class="col-1-of-9 border rounded-sm I1" id="I1"> </div>
-        <div class="col-1-of-9 border rounded-sm I2" id="I2"> </div>
-        <div class="col-1-of-9 border rounded-sm I3" id="I3"> </div>
-        <div class="col-1-of-9 border rounded-sm I4 board-sharp" id="I4"> </div>
-        <div class="col-1-of-9 border rounded-sm I5 board-sharp" id="I5"> </div>
-        <div class="col-1-of-9 border rounded-sm I6 board-sharp" id="I6"> </div>
-        <div class="col-1-of-9 border rounded-sm I7" id="I7"> </div>
-        <div class="col-1-of-9 border rounded-sm I8" id="I8"> </div>
-        <div class="col-1-of-9 border rounded-sm I9" id="I9"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I1" id="I1"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I2" id="I2"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I3" id="I3"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I4 board-sharp" id="I4"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I5 board-sharp" id="I5"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I6 board-sharp" id="I6"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I7" id="I7"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I8" id="I8"> </div>
+        <div class="grid-col col-1-of-9 border rounded-sm I9" id="I9"> </div>
       </div>
     </div>
 
     <div class="numpad mt-5 border rounded-lg shadow halffade">
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item" id="digit-1"><span class="badge badge-light count-1">0</span>1</li>
-        <li class="list-group-item" id="digit-2"><span class="badge badge-light count-2">0</span>2</li>
-        <li class="list-group-item" id="digit-3"><span class="badge badge-light count-3">0</span>3</li>
-        <li class="list-group-item" id="digit-4"><span class="badge badge-light count-4">0</span>4</li>
-        <li class="list-group-item" id="digit-5"><span class="badge badge-light count-5">0</span>5</li>
+      <ul class="numpad-row list-group list-group-horizontal">
+        <li class="numpad-item list-group-item" id="digit-1"><span class="badge badge-light count-1">0</span>1</li>
+        <li class="numpad-item list-group-item" id="digit-2"><span class="badge badge-light count-2">0</span>2</li>
+        <li class="numpad-item list-group-item" id="digit-3"><span class="badge badge-light count-3">0</span>3</li>
+        <li class="numpad-item list-group-item" id="digit-4"><span class="badge badge-light count-4">0</span>4</li>
+        <li class="numpad-item list-group-item" id="digit-5"><span class="badge badge-light count-5">0</span>5</li>
       </ul>
-      <ul class="list-group list-group-horizontal">
-        <li class="list-group-item" id="digit-6"><span class="badge badge-light count-6">0</span>6</li>
-        <li class="list-group-item" id="digit-7"><span class="badge badge-light count-7">0</span>7</li>
-        <li class="list-group-item" id="digit-8"><span class="badge badge-light count-8">0</span>8</li>
-        <li class="list-group-item" id="digit-9"><span class="badge badge-light count-9">0</span>9</li>
-        <!--  <li class="list-group-item" id="numpad-draft">Draft</li>
-        <li class="list-group-item" id="numpad-color">Color</li> -->
-        <li class="list-group-item" id="numpad-clear"><i class="fas fa-backspace"></i></li>
+      <ul class="numpad-row list-group list-group-horizontal">
+        <li class="numpad-item list-group-item" id="digit-6"><span class="badge badge-light count-6">0</span>6</li>
+        <li class="numpad-item list-group-item" id="digit-7"><span class="badge badge-light count-7">0</span>7</li>
+        <li class="numpad-item list-group-item" id="digit-8"><span class="badge badge-light count-8">0</span>8</li>
+        <li class="numpad-item list-group-item" id="digit-9"><span class="badge badge-light count-9">0</span>9</li>
+        <!-- <li class="numpad-item list-group-item" id="numpad-draft">Draft</li>
+        <li class="numpad-item list-group-item" id="numpad-color">Color</li> -->
+        <li class="numpad-item list-group-item" id="numpad-clear"><i class="fas fa-backspace"></i></li>
       </ul>
     </div>
   </div>
 
-  <footer>
-    <div class="github d-flex justify-content-center align-items-center mt-5 p-1">
-      <i class="fas fa-code"></i>
-      <a class="repo-link" href="https://github.com/ykekre/sudoku" target="_blank" rel="noopener noreferrer">
+  <footer class="footer d-flex justify-content-center align-items-center mt-3 p-1">
+    <div class="footer-body my-3">
+      <i class="footer-icon fas fa-code"></i>
+      <a class="footer-repo-link" href="https://github.com/ykekre/sudoku" target="_blank" rel="noopener noreferrer">
         Yugesh
         Kekre</a>
     </div>
