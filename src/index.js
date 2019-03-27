@@ -1,3 +1,4 @@
+import './favicons';
 import "./main.scss";
 import {
   elements
