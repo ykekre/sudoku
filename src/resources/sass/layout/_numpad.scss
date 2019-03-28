@@ -1,20 +1,30 @@
 .numpad {
 
-  // width: 70vh;
-  // height: 14vh;
+  &.default-blue {
+    color: $color-input-number;
+  }
+
+  &.second {
+    color: $numpad-second-color;
+  }
+
+  &.third {
+    color: $numpad-third-color;
+  }
+
   &.halffade {
     opacity: 0.5;
   }
 
-  .numpad-item {
+  &-item {
     position: relative;
-    width: 14vh;
+    width: 12vh;
     text-align: center;
     background-color: $color-light-1;
     font-family: $numbers;
     font-size: 2rem;
     cursor: pointer;
-    color: $color-input-number;
+
     font-weight: 700;
 
     &:hover {
@@ -26,22 +36,18 @@
 
         background-color: $color-board-sharp;
         color: $color-number;
-
       }
     }
 
     &:active {
-      background-color: #dfe7d4;
-      outline-color: #dfe7d4;
-      border-color: #dfe7d4;
+      background-color: $numpad-active-background;
+      outline-color: $numpad-active-background;
+      border-color: $numpad-active-background;
 
       span.badge {
-
-        background-color: #dfe7d4;
+        background-color: $numpad-active-background;
         color: $color-number;
-
       }
-
     }
 
     span.badge {
@@ -50,8 +56,6 @@
       right: 1px;
       background-color: $color-light-1;
       color: $color-number;
-
     }
   }
-
 }

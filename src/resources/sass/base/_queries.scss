@@ -1,23 +1,27 @@
 /* tablets with large height */
-@media only screen and (max-width: 800px) {
+@media only screen and (max-width: 800px) and (min-height: 1250px) {
 
-  /* .container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  } */
+  .container .grid {
+    height: 54vh;
+    width: 54vh;
+
+    &-row .col-1-of-9 {
+
+      font-size: 1.7rem;
+    }
+  }
 
   .numpad {
 
     .numpad-item {
-      width: 12vh;
+      width: 9vh;
       font-size: 1.6rem;
     }
   }
 }
 
 /* tablets with large height */
-@media only screen and (min-height: 940px) {
+@media only screen and (max-width: 768px) {
   .container .grid {
     height: 54vh;
     width: 54vh;
@@ -60,21 +64,38 @@
     height: 45vh;
     width: 45vh;
 
-
     .grid-row .col-1-of-9 {
-
       font-size: 1.6rem;
+
+      .edit {
+        max-width: 100%; // padding: 1.5px;
+        justify-self: flex-start;
+
+        &.three {
+          font-size: 0.9rem;
+        }
+
+        &.six {
+          font-size: 0.8rem;
+        }
+
+        &.nine {
+          font-size: 0.7rem;
+        }
+      }
     }
   }
 
   .numpad {
 
     // width: 50vh;
-    height: 10vh;
+    height: 9vh;
 
     .numpad-item {
-      width: 10vh;
+      width: 9vh;
       font-size: 1.6rem;
+
+
     }
   }
 

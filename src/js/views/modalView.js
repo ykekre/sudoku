@@ -34,9 +34,6 @@ export function getLevel() {
 // //? Show puzzle on modal hide
 $('#levelModal').on('hide.bs.modal', controlPuzzle)
 
-//  //?Show new puzzle after restart game
-//  $('.alert').on('close.bs.alert',controlPuzzle );
-
 //?Show notification after game start
 $('.toast.puzzle-load').on('show.bs.toast', function () {
   let level = getLevel();

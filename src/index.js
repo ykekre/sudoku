@@ -22,7 +22,7 @@ import {
   removeColorWrongInput,
   squareValue,
   removeHighlight,
-  colorRandomError,
+  colorRandomWrongCell,
   disable
 } from './js/views/puzzleView';
 import {
@@ -47,12 +47,7 @@ function setupListeners() {
 
   //*2. Board cell listeners
   //!When user clicks on a cell
-  elements.grid.addEventListener('click', onCellClicked)
-
-
-  //! When user enters value in any cell
-  elements.grid.addEventListener('beforeinput', onCellClicked)
-  elements.grid.addEventListener('input', onCellChange)
+  elements.grid.addEventListener('click', onCellClicked);
 
   //*3 Settings button listeners
   elements.newGame.addEventListener('click', newGame);
@@ -60,7 +55,7 @@ function setupListeners() {
   elements.check.addEventListener('click', check);
   elements.solve.addEventListener('click', solve);
 
-  //*4 Numpad listener
+  //*4 Numpad listeners
   elements.numpad.addEventListener('click', setNumpadValue);
   elements.numpad.addEventListener('click', inputValue);
 }
@@ -68,7 +63,6 @@ function setupListeners() {
 
 //?Puzzle board related stuff
 export function controlPuzzle() {
-
 
   //*1. Show game started notification
   $('.toast.puzzle-load').toast('show');
@@ -79,19 +73,20 @@ export function controlPuzzle() {
     state.puzzle = new Puzzle(difficulty);
   } else state.puzzle = new Puzzle('easy');
 
+  //3* Create puzzle as per level
   state.puzzle.setBoard();
 
-  //*3. Render puzzle board
+  //*4. Render puzzle board on screen
   makeBoard(state.puzzle.board);
 
   //*4 Calculate numpad badge values
   badgeCounter();
   showBadgeCount();
 
-  //*5 Parse puzzle array into string
+  //*5 Parse puzzle array for feeding into solver
   state.puzzle.parsePuzzle();
 
-  //*6 Solve Puzzle
+  //*6 Solve Puzzle and get array
   state.solvedValArray = Object.values(state.puzzle.solvePuzzle());
 
 }
@@ -111,8 +106,9 @@ function newGame() {
     },
     callback: function (result) {
       if (result) {
+        //*If confirmed
+        //*Load New Game modal for setting levels
         loadModal();
-
       }
     }
   });
@@ -121,9 +117,10 @@ function newGame() {
 
 function inputValue() {
 
-  //*1 Find cell which is in focus
+  //*1 Get clicked numpad value
   const value = getNumpadValue();
 
+  //*2 if a digit has been clicked
   if (value !== 0 && !isNaN(value)) {
 
     setCellValue(value);
@@ -139,17 +136,14 @@ function inputValue() {
 export function onCellChange(cell, value) {
 
   if (cell) {
-
     if (checkValidity(value, cell)) {
       removeColorWrongInput(cell)
 
-      //*Check if puzzle completed - if yes show win alert
+      //*Check if puzzle completed without any error - if yes show win alert
       if (!currentBoard().includes(NaN) && check()) {
         onWin();
-
       }
     }
-
     //*update badges in numpad
     badgeCounter();
     showBadgeCount();
@@ -157,11 +151,15 @@ export function onCellChange(cell, value) {
   }
 }
 
+//*Check if entered value is as per the rules
 function checkValidity(value, cell) {
   const peers = findPeers(cell);
   let matched = [cell];
 
   for (const peer of peers) {
+
+    //* Cant allow a value which already
+    //*exists in the cell's peers
     if (value === squareValue(peer)) {
       matched.push(peer);
     }
@@ -179,6 +177,7 @@ function checkValidity(value, cell) {
 
 }
 
+//*Update badge on the numpad digits
 export function badgeCounter() {
   const digits = new Map();
   digits.set(1, 0)
@@ -204,14 +203,17 @@ export function badgeCounter() {
   return digits;
 }
 
+//* reset the board to original state
 function reset() {
   currentBoard();
-
   makeBoard(state.puzzle.board);
   badgeCounter();
   showBadgeCount();
   $('.toast.puzzle-reset').toast('show');
 }
+
+//*User has option to undo (go back to previous board state)
+//*after doing reset
 
 export function undo() {
   for (let index = 0; index < squares.length; index++) {
@@ -232,9 +234,7 @@ function currentBoard() {
     current.push(squareValue(square));
   }
   state.currentBoard = current;
-
   return current;
-
 }
 
 
@@ -256,11 +256,14 @@ function check() {
     return true;
   } else {
 
-    colorRandomError(wrongCells);
+    //*highlight one of the wrongcells if user chooses
+    //* hint option
+    colorRandomWrongCell(wrongCells);
     return false;
   }
 }
 
+//*Solve the entire puzzle
 function solve() {
 
   bootbox.confirm({
@@ -290,9 +293,7 @@ function solve() {
 }
 
 function onWin() {
-
   showWinAlert();
-
 }
 
 ['hashchange', 'load'].forEach(event => window.addEventListener(event, loadModal));

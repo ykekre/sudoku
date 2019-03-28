@@ -11,4 +11,5 @@ export const elements = {
   'newGame': document.querySelector('#btn-newGame'),
   'undo': document.querySelector('.undo'),
   'alertlevels': document.querySelectorAll('div.alert > button')
+
 }

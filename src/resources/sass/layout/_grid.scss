@@ -49,8 +49,27 @@
       text-align: center;
       display: flex;
       justify-content: center;
+      flex-wrap: wrap;
       align-items: center;
-      // background-color: $color-board-bg;
+
+      .edit {
+        max-width: 100%; // padding: 1.5px;
+        justify-self: flex-start;
+
+        &.three {
+          font-size: 1.5rem;
+        }
+
+        &.six {
+          font-size: 1.3rem;
+        }
+
+        &.nine {
+          font-size: 1rem;
+        }
+      }
+
+
 
       &.highlight-peers {
         background-color: $highlight-peers !important;
