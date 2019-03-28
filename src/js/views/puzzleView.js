@@ -175,14 +175,17 @@ function editMode(cell, value, editValues) {
   if (editValues.length < 4) {
     for (const element of edits) {
       element.classList.add('three');
+      element.classList.remove('six', 'nine');
     }
   } else if (editValues.length <= 6) {
     for (const element of edits) {
       element.classList.add('six');
+      element.classList.remove('three', 'nine');
     }
   } else if (editValues.length > 6) {
     for (const element of edits) {
       element.classList.add('nine');
+      element.classList.remove('six', 'three');
     }
   }
 }
