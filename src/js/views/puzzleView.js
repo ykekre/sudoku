@@ -205,31 +205,30 @@ function removeHighlightsAll(...clazz) {
 export function removeHighlight(cells, clazz) {
   for (const cell of cells) {
     if (cell) {
-      const nodes = document.querySelectorAll(`#${cell}`)
-      for (const node of nodes) {
-        node.classList.remove(`${clazz}`);
-      }
+
+      document.querySelector(`#${cell}`).classList.remove(`${clazz}`);
+
     }
   }
 }
 
 export function colorWrongInput(cell) {
-  let cells = document.querySelectorAll(`#${cell}`);
-  for (const cell of cells) {
-    if (cell)
-      cell.classList.add('wrong-input');
+  let square = document.querySelector(`#${cell}`);
 
+  if (square) {
+    square.style.color = null;
+    square.classList.add('wrong-input');
   }
 }
 
 export function removeColorWrongInput(cell) {
-  let cells = document.querySelectorAll(`#${cell}`);
-  for (const cell of cells) {
-    if (cell) {
-      if (cell.classList.contains('wrong-input'))
-        cell.classList.remove('wrong-input');
-    }
+  let square = document.querySelector(`#${cell}`);
+
+  if (square) {
+    if (square.classList.contains('wrong-input'))
+      square.classList.remove('wrong-input');
   }
+
 }
 
 function sameSquares(cell) {
@@ -251,9 +250,12 @@ export function colorRandomWrongCell(wrongCells) {
   let count = wrongCells.length
   while (count > 0) {
     const pick = wrongCells[Math.floor(Math.random() * (wrongCells.length))];
-
+    console.log(pick);
+    console.log(wrongCells);
     if (document.querySelector(`#${pick}`).classList.contains('wrong-input')) {
       count--;
+      const index = wrongCells.indexOf(pick);
+      if (index !== -1) wrongCells.splice(index, 1);
       continue;
     } else {
       colorWrongInput(pick);
