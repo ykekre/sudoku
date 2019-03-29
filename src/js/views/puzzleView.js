@@ -122,7 +122,7 @@ export function setCellValue(value) {
       let editValues = [];
 
       if (thisCell.childNodes.length > 0 && thisCell.childNodes[0].nodeName == '#text') {
-        thisCell.classList.add('justify-content-between');
+
         const val = squareValue(cell).toString();
         editValues.push(val);
         thisCell.textContent = '';
@@ -131,6 +131,7 @@ export function setCellValue(value) {
           `<div class='edit'  id='digit${val}'>${val.toString()}</div>`);
       }
       editMode(cell, value.toString(), editValues);
+      thisCell.classList.add('justify-content-between');
       thisCell.style.color = state.currentColor;
       return;
     } else {
@@ -172,12 +173,12 @@ function editMode(cell, value, editValues) {
 
   edits = document.querySelectorAll(`div.${cell}> div`);
 
-  if (editValues.length < 4) {
+  if (editValues.length > 1 && editValues.length < 4) {
     for (const element of edits) {
       element.classList.add('three');
       element.classList.remove('six', 'nine');
     }
-  } else if (editValues.length <= 6) {
+  } else if (editValues.length >= 4 && editValues.length <= 6) {
     for (const element of edits) {
       element.classList.add('six');
       element.classList.remove('three', 'nine');
