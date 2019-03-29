@@ -180,24 +180,17 @@ function checkValidity(value, cell) {
 //*Update badge on the numpad digits
 export function badgeCounter() {
   const digits = new Map();
-  digits.set(1, 0)
-  digits.set(2, 0)
-  digits.set(3, 0)
-  digits.set(4, 0)
-  digits.set(5, 0)
-  digits.set(6, 0)
-  digits.set(7, 0)
-  digits.set(8, 0)
-  digits.set(9, 0)
+
+  for (let i = 1; i < 10; i++) {
+    digits.set(i, 0);
+  }
 
   for (const square of squares) {
     const digit = squareValue(square);
-    if (digit) {
-      if (digits.has(digit)) {
-        let count = digits.get(digit)
-        count = count + 1;
-        digits.set(digit, count);
-      }
+    if (digit && digits.has(digit)) {
+      let count = digits.get(digit)
+      count = count + 1;
+      digits.set(digit, count);
     }
   }
   return digits;

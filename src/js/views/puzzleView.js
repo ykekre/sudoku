@@ -43,14 +43,13 @@ export function makeBoard(puzzle) {
   function helper(row, index, value) {
 
     let square = document.querySelector(`.${row}${index+1}`);
+    square.style.color = null;
     if (value !== null) {
       square.textContent = value;
       square.classList.add('solved');
     } else {
-
       square.classList.add('unsolved');
       square.textContent = '';
-
     }
   }
 }
@@ -153,7 +152,6 @@ function editMode(cell, value, editValues) {
 
     if (!editValues.includes(element.textContent)) {
       editValues.push(element.textContent);
-
     }
   }
 
