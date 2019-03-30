@@ -4,11 +4,15 @@ import {
 } from '../vendor/sudoku';
 import {
   onCellChange,
-  state
+  state,
+  badgeCounter
 } from '../..';
 import {
   elements
 } from './base';
+import {
+  showBadgeCount
+} from './numpadView';
 
 export function makeBoard(puzzle) {
 
@@ -18,7 +22,6 @@ export function makeBoard(puzzle) {
 
   for (let index = 0; index < puzzle.length; index++) {
     const getSquareValue = puzzle[index];
-
     if (index < 9) {
       helper('A', index, getSquareValue)
     } else if (index > 8 && index < 18) {
@@ -41,9 +44,7 @@ export function makeBoard(puzzle) {
   }
 
   function helper(row, index, value) {
-
     let square = document.querySelector(`.${row}${index+1}`);
-
     if (value !== null) {
       square.textContent = value;
       square.classList.add('solved');
@@ -58,23 +59,19 @@ export function makeBoard(puzzle) {
 export function getSquareValue(cell) {
   const square = document.querySelector(`.${cell}`)
   return parseInt(square.innerText);
-
 }
-
 
 //* highlights an array of cells with given color
 export function highlightCells(cellsArr, clazz) {
-
   for (const cell of cellsArr) {
     document.querySelector(`.${cell}`).classList.add(`${clazz}`);
-
   }
 }
 
 export function onCellClick(e) {
-
   let cell = '';
   const clicked = e.target.closest('.col-1-of-9');
+
   if (clicked) {
     cell = clicked.id;
     state.currentCell = cell;
@@ -92,7 +89,7 @@ export function onCellClick(e) {
   removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares');
 
   //*1.if cell has some value, calculate squares which have same cell value
-  if (getSquareValue(cell)) {
+  if (getSquareValue(cell) && !hasMorethanOneValue(cell)) {
     sameSquares(cell)
   }
 
@@ -106,50 +103,59 @@ export function onCellClick(e) {
 }
 
 export function setCellValue(value) {
+  const cell = state.currentCell;
+  const thisCell = document.querySelector(`.${cell}`);
+  const peers = findPeers(cell);
 
   removeHighlightsAll('highlight-same', 'highlight-same-squares');
-  const cell = state.currentCell;
-
-  const thisCell = document.querySelector(`.${cell}`);
-
-  const peers = findPeers(cell);
   highlightCells(peers, 'highlight-peers');
 
   if (thisCell.classList.contains('unsolved')) {
-
     if (state.puzzle.editMode && value != '') {
       let editValues = [];
 
       if (thisCell.childNodes.length > 0 && thisCell.childNodes[0].nodeName == '#text') {
-
         const val = getSquareValue(cell).toString();
         editValues.push(val);
         thisCell.textContent = '';
-
         thisCell.insertAdjacentHTML('afterbegin',
           `<div class='edit'  id='digit${val}'>${val.toString()}</div>`);
       }
+
       editMode(cell, value.toString(), editValues);
-      thisCell.classList.add('justify-content-between');
+
+      if (thisCell.childNodes.length > 1) {
+        thisCell.classList.add('justify-content-between');
+        removeColorWrongInput(cell);
+
+      } else {
+        thisCell.classList.remove('justify-content-between');
+        sameSquares(cell);
+      }
+
+      badgeCounter();
+      showBadgeCount();
       thisCell.style.color = state.currentColor;
       return;
+
     } else {
       thisCell.textContent = value;
     }
+
+    thisCell.classList.remove('justify-content-between');
     thisCell.style.color = state.currentColor;
     onCellChange(cell, value);
     sameSquares(cell);
     return;
+
   } else return;
 
 }
 
 function editMode(cell, value, editValues) {
-
   let edits = document.querySelectorAll(`div.${cell}> div`);
 
   for (const element of edits) {
-
     if (!editValues.includes(element.textContent)) {
       editValues.push(element.textContent);
     }
@@ -163,11 +169,10 @@ function editMode(cell, value, editValues) {
 
   //*pop off this value from the cell, since its already present
   else {
-
     const toDelete = document.querySelector(`div.${cell} > #digit${value}`);
     toDelete.parentNode.removeChild(toDelete);
+    editValues.splice(editValues.indexOf(value), 1);
   }
-
 
   edits = document.querySelectorAll(`div.${cell}> div`);
 
@@ -186,11 +191,14 @@ function editMode(cell, value, editValues) {
       element.classList.add('nine');
       element.classList.remove('six', 'three');
     }
+  } else {
+    for (const element of edits) {
+      element.classList.remove('six', 'three', 'nine');
+    }
   }
 }
 
 function removeHighlightsAll(...clazz) {
-
   for (const classs of clazz) {
     let cells = document.querySelectorAll(`.${classs}`);
 
@@ -221,7 +229,6 @@ export function colorWrongInput(cell) {
 
 export function removeColorWrongInput(cell) {
   let square = document.querySelector(`#${cell}`);
-
   if (square) {
     if (square.classList.contains('wrong-input'))
       square.classList.remove('wrong-input');
@@ -230,11 +237,13 @@ export function removeColorWrongInput(cell) {
 }
 
 function sameSquares(cell) {
-  let sameSquares = [cell];
+  let sameSquares = [];
+  if (!hasMorethanOneValue(cell))
+    sameSquares.push(cell)
   const value = getSquareValue(cell);
   for (const square of squares) {
     const digit = getSquareValue(square);
-    if (value === digit) {
+    if (value === digit && !hasMorethanOneValue(square)) {
       sameSquares.push(square);
     }
   }
@@ -248,8 +257,7 @@ export function colorRandomWrongCell(wrongCells) {
   let count = wrongCells.length
   while (count > 0) {
     const pick = wrongCells[Math.floor(Math.random() * (wrongCells.length))];
-    console.log(pick);
-    console.log(wrongCells);
+
     if (document.querySelector(`#${pick}`).classList.contains('wrong-input')) {
       count--;
       const index = wrongCells.indexOf(pick);
@@ -262,16 +270,28 @@ export function colorRandomWrongCell(wrongCells) {
   }
 }
 
-export function disable(id) {
-
+export function disableReset() {
+  const id = 'btn-reset';
   document.querySelector(`#${id}`).setAttribute('disabled', '');
   document.querySelector(`#${id}`).classList.add('disabled');
 }
 
-export function removeInlineStyledColor() {
+export function enableReset() {
+  const id = 'btn-reset';
+  document.querySelector(`#${id}`).removeAttribute('disabled');
+  document.querySelector(`#${id}`).classList.remove('disabled');
+}
 
+export function removeInlineStyledColor() {
   for (const square of squares) {
     document.querySelector(`.${square}`).style.color = null;
   }
+}
 
+export function hasMorethanOneValue(square) {
+  const cell = document.querySelector(`.${square}`);
+
+  if (cell.childNodes.length > 1)
+    return true;
+  else return false;
 }

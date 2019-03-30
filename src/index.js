@@ -23,14 +23,17 @@ import {
   getSquareValue,
   removeHighlight,
   colorRandomWrongCell,
-  disable,
-  removeInlineStyledColor
+  disableReset,
+  removeInlineStyledColor,
+  hasMorethanOneValue,
+  enableReset
 } from './js/views/puzzleView';
 import {
   showBadgeCount,
   getNumpadValue,
   setNumpadValue,
-  resetNumpad
+  resetNumpad,
+  setEditMode
 } from "./js/views/numpadView";
 
 //?Keep track of game state: Puzzle
@@ -90,6 +93,9 @@ export function controlPuzzle() {
   //*7 remove any user chosen colors on cells
   removeInlineStyledColor();
 
+  //*
+  setEditMode(false);
+  enableReset();
 }
 
 function newGame() {
@@ -116,12 +122,10 @@ function newGame() {
 
 }
 
-
 //*get value from numpad and set it to currently
 //highlighted cell
 
 function inputValue() {
-
   //*1 Get clicked numpad value
   const value = getNumpadValue();
 
@@ -131,14 +135,11 @@ function inputValue() {
   } else if (value === 'clear') {
     setCellValue('');
   } else return;
-
   resetNumpad();
 }
 
-
 //? When user enters a value
 export function onCellChange(cell, value) {
-
   if (cell) {
     if (checkValidity(value, cell)) {
       removeColorWrongInput(cell)
@@ -161,14 +162,12 @@ function checkValidity(value, cell) {
   let matched = [cell];
 
   for (const peer of peers) {
-
     //* Cant allow a value which already
     //*exists amongst the cell's peers
     if (value === getSquareValue(peer)) {
       matched.push(peer);
     }
   }
-
   if (matched.length > 1) {
     highlightCells(matched, 'highlight-same');
     removeHighlight(matched, 'highlight-peers');
@@ -190,11 +189,13 @@ export function badgeCounter() {
   }
 
   for (const square of squares) {
-    const digit = getSquareValue(square);
-    if (digit && digits.has(digit)) {
-      let count = digits.get(digit)
-      count = count + 1;
-      digits.set(digit, count);
+    if (!hasMorethanOneValue(square)) {
+      const digit = getSquareValue(square);
+      if (digit && digits.has(digit)) {
+        let count = digits.get(digit)
+        count = count + 1;
+        digits.set(digit, count);
+      }
     }
   }
   return digits;
@@ -211,7 +212,6 @@ function reset() {
 
 //*User has option to undo (go back to previous board state)
 //*after doing reset
-
 export function undo() {
   for (let index = 0; index < squares.length; index++) {
     const square = squares[index];
@@ -234,7 +234,6 @@ function currentBoard() {
   return current;
 }
 
-
 //? Check errors and give hints to user
 function check() {
   const solved = state.solvedValArray;
@@ -243,17 +242,16 @@ function check() {
 
   for (let index = 0; index < cur.length; index++) {
     const value = cur[index];
-    if (!isNaN(value)) {
-      if (value !== parseInt(solved[index])) {
-        wrongCells.push(squares[index]);
-      }
+
+    if (!isNaN(value) && value !== parseInt(solved[index]) && !hasMorethanOneValue(squares[index])) {
+      wrongCells.push(squares[index]);
     }
   }
+
   if (wrongCells.length === 0) {
     //*there are no errors
     return true;
   } else {
-
     //*highlight one of the wrongcells if user chooses
     //* hint option
     colorRandomWrongCell(wrongCells);
@@ -282,7 +280,7 @@ function solve() {
         makeBoard(state.solvedValArray);
         badgeCounter();
         showBadgeCount();
-        disable('btn-reset');
+        disableReset();
 
       }
     }

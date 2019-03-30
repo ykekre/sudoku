@@ -7,64 +7,49 @@ import {
   elements
 } from './base';
 
-
-
-
 let clickedNumpad = 0;
 const inputBlue = '#4c3b78cc';
 const second = '#60A36C';
 const third = '#D4847E';
 
-
 //*show value on the badge for each digit
 export function showBadgeCount() {
-
   for (let index = 1; index < 10; index++) {
     const digits = digitsMap();
     document.querySelector(`.count-${index}`).textContent = digits.get(index);
   }
 }
 
-
 //* What is the numpad cell which user clicked
 export function setNumpadValue(e) {
-
   const cell = e.target.closest('.numpad-item');
 
   if (cell.id === 'numpad-clear') {
+
     clickedNumpad = 'clear';
 
   } else if (cell.id === 'numpad-draft') {
 
     if (!state.puzzle.editMode) {
-      state.puzzle.editMode = true;
-      document.querySelector('i.fa-ban').classList.add('fade');
+      setEditMode(true);
     } else {
-      state.puzzle.editMode = false;
-      document.querySelector('i.fa-ban').classList.remove('fade');
-      let cells = document.querySelectorAll(`.grid-col.justify-content-between`);
-
-      for (const cell of cells) {
-        if (cell)
-          cell.classList.remove('justify-content-between')
-      }
-
+      setEditMode(false);
     }
+
   } else if (cell.id === 'numpad-color') {
     changeColor();
+
   } else {
     clickedNumpad = parseInt(cell.textContent.charAt(1));
   }
 }
 
 export function getNumpadValue() {
-
   return clickedNumpad;
 }
 
 
 //*After setting the value in cell reset it to zero
-
 export function resetNumpad() {
   clickedNumpad = 0;
 }
@@ -87,4 +72,14 @@ function changeColor() {
     state.currentColor = inputBlue;
   }
 
+}
+
+export function setEditMode(option) {
+  if (option) {
+    state.puzzle.editMode = true;
+    document.querySelector('i.fa-ban').classList.add('fade');
+  } else {
+    state.puzzle.editMode = false;
+    document.querySelector('i.fa-ban').classList.remove('fade');
+  }
 }
