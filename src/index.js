@@ -17,13 +17,14 @@ import {
 import {
   makeBoard,
   highlightCells,
-  onCellClicked,
+  onCellClick,
   setCellValue,
   removeColorWrongInput,
-  squareValue,
+  getSquareValue,
   removeHighlight,
   colorRandomWrongCell,
-  disable
+  disable,
+  removeInlineStyledColor
 } from './js/views/puzzleView';
 import {
   showBadgeCount,
@@ -35,19 +36,16 @@ import {
 //?Keep track of game state: Puzzle
 export const state = {};
 
-
-
 function setupListeners() {
 
   //*1. modal button listeners
   for (const btn of elements.level) {
     btn.addEventListener('click', setLevel);
-
   }
 
   //*2. Board cell listeners
   //!When user clicks on a cell
-  elements.grid.addEventListener('click', onCellClicked);
+  elements.grid.addEventListener('click', onCellClick);
 
   //*3 Settings button listeners
   elements.newGame.addEventListener('click', newGame);
@@ -89,6 +87,9 @@ export function controlPuzzle() {
   //*6 Solve Puzzle and get array
   state.solvedValArray = Object.values(state.puzzle.solvePuzzle());
 
+  //*7 remove any user chosen colors on cells
+  removeInlineStyledColor();
+
 }
 
 function newGame() {
@@ -115,6 +116,10 @@ function newGame() {
 
 }
 
+
+//*get value from numpad and set it to currently
+//highlighted cell
+
 function inputValue() {
 
   //*1 Get clicked numpad value
@@ -122,11 +127,10 @@ function inputValue() {
 
   //*2 if a digit has been clicked
   if (value !== 0 && !isNaN(value)) {
-
     setCellValue(value);
   } else if (value === 'clear') {
     setCellValue('');
-  }
+  } else return;
 
   resetNumpad();
 }
@@ -159,8 +163,8 @@ function checkValidity(value, cell) {
   for (const peer of peers) {
 
     //* Cant allow a value which already
-    //*exists in the cell's peers
-    if (value === squareValue(peer)) {
+    //*exists amongst the cell's peers
+    if (value === getSquareValue(peer)) {
       matched.push(peer);
     }
   }
@@ -186,7 +190,7 @@ export function badgeCounter() {
   }
 
   for (const square of squares) {
-    const digit = squareValue(square);
+    const digit = getSquareValue(square);
     if (digit && digits.has(digit)) {
       let count = digits.get(digit)
       count = count + 1;
@@ -212,7 +216,7 @@ export function undo() {
   for (let index = 0; index < squares.length; index++) {
     const square = squares[index];
 
-    if (!squareValue(square) && state.currentBoard[index]) {
+    if (!getSquareValue(square) && state.currentBoard[index]) {
       document.querySelector(`.unsolved#${square}`).textContent = state.currentBoard[index]
     }
   }
@@ -224,7 +228,7 @@ export function undo() {
 function currentBoard() {
   const current = []
   for (const square of squares) {
-    current.push(squareValue(square));
+    current.push(getSquareValue(square));
   }
   state.currentBoard = current;
   return current;
@@ -246,6 +250,7 @@ function check() {
     }
   }
   if (wrongCells.length === 0) {
+    //*there are no errors
     return true;
   } else {
 

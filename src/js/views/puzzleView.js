@@ -17,33 +17,33 @@ export function makeBoard(puzzle) {
   removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares', 'wrong-input', 'solved', 'unsolved');
 
   for (let index = 0; index < puzzle.length; index++) {
-    const squareValue = puzzle[index];
+    const getSquareValue = puzzle[index];
 
     if (index < 9) {
-      helper('A', index, squareValue)
+      helper('A', index, getSquareValue)
     } else if (index > 8 && index < 18) {
-      helper('B', index - 9, squareValue)
+      helper('B', index - 9, getSquareValue)
     } else if (index > 17 && index < 27) {
-      helper('C', index - 18, squareValue);
+      helper('C', index - 18, getSquareValue);
     } else if (index > 26 && index < 36) {
-      helper('D', index - 27, squareValue);
+      helper('D', index - 27, getSquareValue);
     } else if (index > 35 && index < 45) {
-      helper('E', index - 36, squareValue);
+      helper('E', index - 36, getSquareValue);
     } else if (index > 44 && index < 54) {
-      helper('F', index - 45, squareValue);
+      helper('F', index - 45, getSquareValue);
     } else if (index > 53 && index < 63) {
-      helper('G', index - 54, squareValue);
+      helper('G', index - 54, getSquareValue);
     } else if (index > 62 && index < 72) {
-      helper('H', index - 63, squareValue);
+      helper('H', index - 63, getSquareValue);
     } else if (index > 71 && index < 81) {
-      helper('I', index - 72, squareValue);
+      helper('I', index - 72, getSquareValue);
     }
   }
 
   function helper(row, index, value) {
 
     let square = document.querySelector(`.${row}${index+1}`);
-    square.style.color = null;
+
     if (value !== null) {
       square.textContent = value;
       square.classList.add('solved');
@@ -55,7 +55,7 @@ export function makeBoard(puzzle) {
 }
 
 //*Whats the value in the cell
-export function squareValue(cell) {
+export function getSquareValue(cell) {
   const square = document.querySelector(`.${cell}`)
   return parseInt(square.innerText);
 
@@ -71,7 +71,7 @@ export function highlightCells(cellsArr, clazz) {
   }
 }
 
-export function onCellClicked(e) {
+export function onCellClick(e) {
 
   let cell = '';
   const clicked = e.target.closest('.col-1-of-9');
@@ -92,7 +92,7 @@ export function onCellClicked(e) {
   removeHighlightsAll('highlight-clicked', 'highlight-peers', 'highlight-same', 'highlight-same-squares');
 
   //*1.if cell has some value, calculate squares which have same cell value
-  if (squareValue(cell)) {
+  if (getSquareValue(cell)) {
     sameSquares(cell)
   }
 
@@ -122,7 +122,7 @@ export function setCellValue(value) {
 
       if (thisCell.childNodes.length > 0 && thisCell.childNodes[0].nodeName == '#text') {
 
-        const val = squareValue(cell).toString();
+        const val = getSquareValue(cell).toString();
         editValues.push(val);
         thisCell.textContent = '';
 
@@ -204,7 +204,6 @@ function removeHighlightsAll(...clazz) {
 export function removeHighlight(cells, clazz) {
   for (const cell of cells) {
     if (cell) {
-
       document.querySelector(`#${cell}`).classList.remove(`${clazz}`);
 
     }
@@ -232,9 +231,9 @@ export function removeColorWrongInput(cell) {
 
 function sameSquares(cell) {
   let sameSquares = [cell];
-  const value = squareValue(cell);
+  const value = getSquareValue(cell);
   for (const square of squares) {
-    const digit = squareValue(square);
+    const digit = getSquareValue(square);
     if (value === digit) {
       sameSquares.push(square);
     }
@@ -267,4 +266,12 @@ export function disable(id) {
 
   document.querySelector(`#${id}`).setAttribute('disabled', '');
   document.querySelector(`#${id}`).classList.add('disabled');
+}
+
+export function removeInlineStyledColor() {
+
+  for (const square of squares) {
+    document.querySelector(`.${square}`).style.color = null;
+  }
+
 }

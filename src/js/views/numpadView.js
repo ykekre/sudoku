@@ -6,9 +6,7 @@ import {
 import {
   elements
 } from './base';
-import {
-  squares
-} from '../vendor/sudoku';
+
 
 
 
