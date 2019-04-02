@@ -1,19 +1,16 @@
-import './favicons';
+import "./favicons";
 import "./main.scss";
-import {
-  elements
-} from './js/views/base';
-import Puzzle from './js/models/Puzzle';
-import {
-  findPeers,
-  squares
-} from './js/vendor/sudoku';
+import "./resources/sounds/victory-sound.mp3";
+
+import { elements } from "./js/views/base";
+import Puzzle from "./js/models/Puzzle";
+import { findPeers, squares } from "./js/vendor/sudoku";
 import {
   loadModal,
   setLevel,
   getLevel,
   showWinAlert
-} from './js/views/modalView';
+} from "./js/views/modalView";
 import {
   makeBoard,
   highlightCells,
@@ -27,7 +24,7 @@ import {
   removeInlineStyledColor,
   hasMorethanOneValue,
   enableReset
-} from './js/views/puzzleView';
+} from "./js/views/puzzleView";
 import {
   showBadgeCount,
   getNumpadValue,
@@ -35,44 +32,46 @@ import {
   resetNumpad,
   setEditMode
 } from "./js/views/numpadView";
+import { playWinningSound, stopWinningSound } from "./sounds";
 
 //?Keep track of game state: Puzzle
 export const state = {};
 
 function setupListeners() {
-
   //*1. modal button listeners
   for (const btn of elements.level) {
-    btn.addEventListener('click', setLevel);
+    btn.addEventListener("click", setLevel);
   }
 
   //*2. Board cell listeners
   //!When user clicks on a cell
-  elements.grid.addEventListener('click', onCellClick);
+  elements.grid.addEventListener("click", onCellClick);
 
   //*3 Settings button listeners
-  elements.newGame.addEventListener('click', newGame);
-  elements.reset.addEventListener('click', reset);
-  elements.check.addEventListener('click', check);
-  elements.solve.addEventListener('click', solve);
+  elements.newGame.addEventListener("click", newGame);
+  elements.reset.addEventListener("click", reset);
+  elements.check.addEventListener("click", check);
+  elements.solve.addEventListener("click", solve);
 
   //*4 Numpad listeners
-  elements.numpad.addEventListener('click', setNumpadValue);
-  elements.numpad.addEventListener('click', inputValue);
-}
+  elements.numpad.addEventListener("click", setNumpadValue);
+  elements.numpad.addEventListener("click", inputValue);
 
+  //*5 Win alert
+  elements["alert-container"].addEventListener("click", setLevel);
+  elements["alert-container"].addEventListener("click", stopWinningSound);
+}
 
 //?Puzzle board related stuff
 export function controlPuzzle() {
-
   //*1. Show game started notification
-  $('.toast.puzzle-load').toast('show');
+  $(".toast.puzzle-load").toast("show");
 
   //*2. get difficulty level selected by user
   const difficulty = getLevel();
   if (difficulty) {
     state.puzzle = new Puzzle(difficulty);
-  } else state.puzzle = new Puzzle('easy');
+  } else state.puzzle = new Puzzle("easy");
 
   //3* Create puzzle as per level
   state.puzzle.setBoard();
@@ -103,15 +102,15 @@ function newGame() {
     message: "Are you sure you want to start a new game?",
     buttons: {
       confirm: {
-        label: 'Yes',
-        className: 'btn-success'
+        label: "Yes",
+        className: "btn-success"
       },
       cancel: {
-        label: 'No',
-        className: 'btn-danger'
+        label: "No",
+        className: "btn-danger"
       }
     },
-    callback: function (result) {
+    callback: function(result) {
       if (result) {
         //*If confirmed
         //*Load New Game modal for setting levels
@@ -119,7 +118,6 @@ function newGame() {
       }
     }
   });
-
 }
 
 //*get value from numpad and set it to currently
@@ -132,8 +130,8 @@ function inputValue() {
   //*2 if a digit has been clicked
   if (value !== 0 && !isNaN(value)) {
     setCellValue(value);
-  } else if (value === 'clear') {
-    setCellValue('');
+  } else if (value === "clear") {
+    setCellValue("");
   } else return;
   resetNumpad();
 }
@@ -142,11 +140,11 @@ function inputValue() {
 export function onCellChange(cell, value) {
   if (cell) {
     if (checkValidity(value, cell)) {
-      removeColorWrongInput(cell)
+      removeColorWrongInput(cell);
 
       //*Check if puzzle completed without any error - if yes show win alert
       if (!currentBoard().includes(NaN) && check()) {
-        onWin();
+        playWinningSound().then(showWinAlert);
       }
     }
     //*update badges in numpad
@@ -169,15 +167,14 @@ function checkValidity(value, cell) {
     }
   }
   if (matched.length > 1) {
-    highlightCells(matched, 'highlight-same');
-    removeHighlight(matched, 'highlight-peers');
-    return false
+    highlightCells(matched, "highlight-same");
+    removeHighlight(matched, "highlight-peers");
+    return false;
   } else {
-    highlightCells(matched, 'highlight-peers')
-    removeHighlight(matched, 'highlight-same');
+    highlightCells(matched, "highlight-peers");
+    removeHighlight(matched, "highlight-same");
     return true;
   }
-
 }
 
 //*Update badge on the numpad digits
@@ -192,7 +189,7 @@ export function badgeCounter() {
     if (!hasMorethanOneValue(square)) {
       const digit = getSquareValue(square);
       if (digit && digits.has(digit)) {
-        let count = digits.get(digit)
+        let count = digits.get(digit);
         count = count + 1;
         digits.set(digit, count);
       }
@@ -207,7 +204,7 @@ function reset() {
   makeBoard(state.puzzle.board);
   badgeCounter();
   showBadgeCount();
-  $('.toast.puzzle-reset').toast('show');
+  $(".toast.puzzle-reset").toast("show");
 }
 
 //*User has option to undo (go back to previous board state)
@@ -217,7 +214,8 @@ export function undo() {
     const square = squares[index];
 
     if (!getSquareValue(square) && state.currentBoard[index]) {
-      document.querySelector(`.unsolved#${square}`).textContent = state.currentBoard[index]
+      document.querySelector(`.unsolved#${square}`).textContent =
+        state.currentBoard[index];
     }
   }
   badgeCounter();
@@ -226,7 +224,7 @@ export function undo() {
 
 //*Calculate current state of the board
 function currentBoard() {
-  const current = []
+  const current = [];
   for (const square of squares) {
     current.push(getSquareValue(square));
   }
@@ -243,7 +241,11 @@ function check() {
   for (let index = 0; index < cur.length; index++) {
     const value = cur[index];
 
-    if (!isNaN(value) && value !== parseInt(solved[index]) && !hasMorethanOneValue(squares[index])) {
+    if (
+      !isNaN(value) &&
+      value !== parseInt(solved[index]) &&
+      !hasMorethanOneValue(squares[index])
+    ) {
       wrongCells.push(squares[index]);
     }
   }
@@ -261,37 +263,33 @@ function check() {
 
 //*Solve the entire puzzle
 function solve() {
-
   bootbox.confirm({
-    message: "Are you sure you want to solve the entire puzzle? This will end the game.",
+    message:
+      "Are you sure you want to solve the entire puzzle? This will end the game.",
     buttons: {
       confirm: {
-        label: 'Yes',
-        className: 'btn-success'
+        label: "Yes",
+        className: "btn-success"
       },
       cancel: {
-        label: 'No',
-        className: 'btn-danger'
+        label: "No",
+        className: "btn-danger"
       }
     },
-    callback: function (result) {
+    callback: function(result) {
       if (result) {
         currentBoard();
         makeBoard(state.solvedValArray);
         badgeCounter();
         showBadgeCount();
-        disableReset();
-
+        // disableReset();
       }
     }
   });
-
 }
 
-function onWin() {
-  showWinAlert();
-}
-
-['hashchange', 'load'].forEach(event => window.addEventListener(event, loadModal));
+["hashchange", "load"].forEach(event =>
+  window.addEventListener(event, loadModal)
+);
 
 setupListeners();

@@ -1,29 +1,29 @@
-@import './resources/sass/utils/variables';
+@import "./resources/sass/utils/variables";
+@import "./resources/sass/utils/mixins";
 
-@import './resources/sass/base/typography';
-@import './resources/sass/base/base';
+@import "./resources/sass/base/typography";
+@import "./resources/sass/base/base";
 
+@import "./resources/sass/components/toast";
+@import "./resources/sass/components/alert";
+@import "./resources/sass/components/modal";
 
-@import './resources/sass/components/toast';
-@import './resources/sass/components/alert';
-@import './resources/sass/components/modal';
-
-@import './resources/sass/layout/grid';
-@import './resources/sass/layout/numpad';
-@import './resources/sass/layout/footer';
-@import './resources/sass/base/queries';
+@import "./resources/sass/layout/grid";
+@import "./resources/sass/layout/numpad";
+@import "./resources/sass/layout/footer";
+@import "./resources/sass/base/queries";
 
 /* For Firefox */
-input[type='number'] {
+input[type="number"] {
   -moz-appearance: textfield;
 }
 
 /* Webkit browsers like Safari and Chrome */
-input[type=number]::-webkit-inner-spin-button,
-input[type=number]::-webkit-outer-spin-button,
-[type=button],
-[type=reset],
-[type=submit],
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button,
+[type="button"],
+[type="reset"],
+[type="submit"],
 button {
   -webkit-appearance: none;
   margin: 0;

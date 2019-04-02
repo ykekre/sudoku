@@ -1,6 +1,5 @@
 /* tablets with large height */
 @media only screen and (max-width: 810px) {
-
   .container .grid {
     height: 45vh;
     width: 45vh;
@@ -27,8 +26,16 @@
     }
   }
 
-  .numpad {
+  .alert {
+    .btn-level-group {
+      justify-content: space-around;
 
+      .btn.btn-primary.btn-lg {
+        width: 24%;
+      }
+    }
+  }
+  .numpad {
     .numpad-item {
       width: 10vh;
       font-size: 2.25rem;
@@ -61,18 +68,14 @@
           font-size: 1.7rem;
         }
       }
-
-
     }
 
     .settings-item {
       font-size: 1.75rem;
-
     }
   }
 
   .numpad {
-
     &-item {
       width: 11vh;
       font-size: 2.5rem;
@@ -91,14 +94,21 @@
   .settings-item {
     letter-spacing: 1.2px;
     font-size: 1.5rem;
-
   }
 
+  .alert {
+    .btn-level-group {
+      justify-content: space-around;
+
+      .btn.btn-primary.btn-lg {
+        width: 24%;
+      }
+    }
+  }
 }
 
 /* Small phones to small tablets: */
 @media only screen and (max-width: 576px) {
-
   .container .grid {
     height: 45vh;
     width: 45vh;
@@ -125,22 +135,19 @@
     }
 
     .settings-item {
-      padding: .25rem 0.8rem;
+      padding: 0.25rem 0.8rem;
       letter-spacing: 1.1px;
       font-size: 1.1rem;
     }
   }
 
   .numpad {
-
     // width: 50vh;
     height: 9vh;
 
     .numpad-item {
       width: 9vh;
       font-size: 1.6rem;
-
-
     }
   }
 
@@ -157,8 +164,15 @@
     }
   }
 
+  .alert {
+    .btn-level-group {
+      justify-content: space-around;
 
-
+      .btn.btn-primary.btn-lg {
+        width: 33%;
+      }
+    }
+  }
 
   .toast {
     font-size: 1.2rem;
@@ -167,8 +181,7 @@
 }
 
 /* Smartphones (portrait and landscape) ----------- */
-@media only screen and (max-width : 320px) {
-
+@media only screen and (max-width: 320px) {
   .container .grid {
     height: 45vh;
     width: 45vh;
@@ -195,6 +208,19 @@
     }
   }
 
+  .alert {
+    font-size: 1.3rem;
+
+    .btn-level-group {
+      justify-content: space-around;
+
+      .btn.btn-primary.btn-lg {
+        width: 33%;
+        font-size: 1.3rem;
+      }
+    }
+  }
+
   .settings-item {
     font-size: 1rem;
   }
@@ -206,7 +232,6 @@
     .numpad-item {
       width: 9vh;
       font-size: 1rem;
-
     }
   }
 }

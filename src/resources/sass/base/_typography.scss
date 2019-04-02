@@ -1,5 +1,5 @@
 .body {
-  font-family: 'Arvo', serif;
+  font-family: "Arvo", serif;
 }
 
 .grid-col {
@@ -15,64 +15,53 @@
       color: $color-wrong-input;
     }
   }
-
-
 }
 
 #levelModal .modal-content {
   font-size: 2rem;
 
   .modal-header h2 {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     font-weight: 700;
     color: $color-modal-text;
-
   }
 
   .modal-body p {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
     color: $color-modal-text;
   }
-
-  .btn-level-group {
-    font-family: 'Pacifico', cursive;
-    font-style: italic;
-    font-weight: 700;
-    // letter-spacing: 1.5px;
-  }
+  @include btn-typography;
 }
 
 .settings-item {
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
   letter-spacing: 0.35px;
   font-size: 1.3rem;
   color: $color-modal-text;
-
 }
 
 .alert {
-  font-family: 'Pacifico', cursive;
-  letter-spacing: 1px;
+  font-family: "Josefin Sans", sans-serif;
   color: $color-modal-text;
 
+  @include btn-typography;
 }
-
 
 .bootbox.modal .modal-dialog .modal-content {
   background-color: $color-modal-background;
   color: $color-modal-text;
-  font-family: 'Josefin Sans', sans-serif;
+  font-family: "Josefin Sans", sans-serif;
   font-weight: 700;
   color: $color-modal-text;
 
   .modal-footer {
-    font-family: 'Josefin Sans', sans-serif;
+    font-family: "Josefin Sans", sans-serif;
   }
 }
 
 .toast {
-  font-family: 'Pacifico', cursive;
+  font-family: "Pacifico", cursive;
   font-style: italic;
   font-size: 1.7rem;
   font-weight: 700;
@@ -81,14 +70,11 @@
 }
 
 .footer {
-
   font-size: 1em;
-  font-family: 'Permanent Marker', cursive;
-
+  font-family: "Permanent Marker", cursive;
 
   &-icon {
     color: $footer-body;
-
   }
 
   &-repo-link {
@@ -104,8 +90,6 @@
     &:active {
       text-decoration: none;
       color: darken($footer-body, 20%);
-
     }
   }
-
 }
