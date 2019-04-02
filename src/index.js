@@ -282,7 +282,7 @@ function solve() {
         makeBoard(state.solvedValArray);
         badgeCounter();
         showBadgeCount();
-        // disableReset();
+        disableReset();
       }
     }
   });

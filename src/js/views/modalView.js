@@ -1,6 +1,6 @@
 import { controlPuzzle, undo } from "../../index";
 import { elements } from "./base";
-import "../../resources/sounds/button-click.mp3";
+
 let level;
 
 //? Load difficulty level modal
