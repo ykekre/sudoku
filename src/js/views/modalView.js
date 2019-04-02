@@ -29,23 +29,45 @@ export function getLevel() {
 //$("#levelModal").on("hide.bs.modal", controlPuzzle);
 
 //?Show notification after game start
-$(".toast.puzzle-load").on("show.bs.toast", function() {
-  let level = getLevel();
-  if (!level) level = "Easy";
-  document.querySelector(
-    ".puzzle-load .toast-body"
-  ).textContent = `Game started with ${level} level`;
-});
+export function gameStartedNotification() {
+  $(".toast").toast("show");
+
+  $(".toast").on("shown.bs.toast", function() {
+    let level = getLevel();
+    if (!level) level = "Easy";
+    document.querySelector(
+      ".toast-body"
+    ).textContent = `Game started with ${level} level`;
+  });
+}
 
 //?Show undo messgae after reset
-$(".toast.puzzle-reset").on("show.bs.toast", function() {
-  document.querySelector(
-    ".puzzle-reset .toast-body"
-  ).innerHTML = `Puzzle has been reset. <a href="javascript:;" class="undo" role="button">Undo</a>`;
+export function undoNotification() {
+  $(".toast").toast("show");
+  $(".toast").on("shown.bs.toast", function() {
+    document.querySelector(
+      ".toast-body"
+    ).innerHTML = `Puzzle has been reset. <a href="javascript:;" class="undo" role="button">Undo?</a>`;
 
-  document.querySelector("a.undo").addEventListener("click", undo);
-});
+    document.querySelector("a.undo").addEventListener("click", undo);
+  });
+}
 
+export function noHintsforPrefilledCells() {
+  $(".toast").toast("show");
+  $(".toast").on("shown.bs.toast", function() {
+    document.querySelector(".toast-body").textContent =
+      "Click on empty cells for hints";
+  });
+}
+
+export function noErrors() {
+  $(".toast").toast("show");
+  $(".toast").on("shown.bs.toast", function() {
+    document.querySelector(".toast-body").textContent =
+      "No errors here. You're doing great!";
+  });
+}
 export function showWinAlert() {
   const markup = `<div class="alert alert-success fade show alert-dismissible" role="alert">
                     <h4 class="alert-heading">Well done!</h4>

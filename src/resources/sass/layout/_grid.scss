@@ -5,9 +5,7 @@
   justify-content: center;
   align-items: center;
 
-
   .grid {
-
     height: 63vh;
     width: 63vh;
 
@@ -27,11 +25,19 @@
 
         &-menu {
           background-color: rgba($color-modal-background, 0.478);
-
         }
 
         &-item {
           cursor: pointer;
+          position: relative;
+          padding: 0.25rem 0.5rem;
+
+          span.badge {
+            background-color: rgba($color-modal-background, 0);
+            color: $color-number;
+            font-weight: 700;
+            position: absolute;
+          }
 
           &[disabled] {
             opacity: 0.7;
@@ -39,7 +45,6 @@
           }
         }
       }
-
     }
 
     &-col {
@@ -69,8 +74,6 @@
         }
       }
 
-
-
       &.highlight-peers {
         background-color: $highlight-peers !important;
       }
@@ -92,16 +95,12 @@
       }
 
       &.unsolved {
-
         cursor: text;
-
       }
     }
 
     .board-sharp {
       background-color: $color-board-sharp;
-
     }
-
   }
 }

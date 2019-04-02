@@ -58,18 +58,22 @@
   </div>
   <div class="container  mx-auto ">
 
-    <div class="toast rounded puzzle-load" role="alert" aria-live="assertive" aria-atomic="true" data-delay="3500">
+    <div class="toast rounded" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+
+        <button type="button" class="ml-2 mb-1 close" data-dismiss="toast" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
 
       <div class="toast-body">
         Hello, world! This is a toast message.
       </div>
     </div>
-    <div class="toast rounded puzzle-reset" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
+   <!--  <div class="toast rounded puzzle-reset" role="alert" aria-live="assertive" aria-atomic="true" data-delay="5000">
 
       <div class="toast-body">
         Hello, world! This is a toast message.
       </div>
-    </div>
+    </div> -->
 
     <div class="grid mx-auto rounded-lg shadow  ">
 
@@ -94,7 +98,8 @@
                 <div class="settings-item dropdown-item" id="btn-newGame" role="button">New Puzzle</div>
                 <div class="settings-item dropdown-item" id="btn-reset" role="button">Reset Puzzle</div>
                 <div class="settings-item dropdown-item" id="btn-solve" role="button">Solve Puzzle</div>
-                <div class="settings-item dropdown-item" id="btn-checkErrors" role="button">Hint</div>
+                <div class="settings-item dropdown-item" id="btn-checkErrors" role="button">Check Errors <span class="badge badge-light" id="badge-error">3</span></div>
+                <div class="settings-item dropdown-item" id="btn-hint" role="button">Hint <span class="badge badge-light" id="badge-hint">3</span></div>
 
               </div>
             </div>

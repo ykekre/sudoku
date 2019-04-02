@@ -1,38 +1,46 @@
 import "./favicons";
-import "./main.scss";
-import "./resources/sounds/victory-sound.mp3";
-
-import { elements } from "./js/views/base";
 import Puzzle from "./js/models/Puzzle";
 import { findPeers, squares } from "./js/vendor/sudoku";
+import { elements, DOMStrings } from "./js/views/base";
 import {
+  getLevel,
   loadModal,
   setLevel,
-  getLevel,
-  showWinAlert
+  showWinAlert,
+  undoNotification,
+  gameStartedNotification,
+  noHintsforPrefilledCells,
+  noErrors
 } from "./js/views/modalView";
 import {
+  getNumpadValue,
+  resetNumpad,
+  setEditMode,
+  setNumpadValue,
+  showBadgeCount
+} from "./js/views/numpadView";
+import {
   makeBoard,
+  getSquareValue,
   highlightCells,
-  onCellClick,
+  removeHighlight
+} from "./js/views/puzzleView";
+import "./main.scss";
+import "./resources/sounds/victory-sound.mp3";
+import { playWinningSound, stopWinningSound } from "./sounds";
+import {
+  removeInlineStyledColor,
   setCellValue,
   removeColorWrongInput,
-  getSquareValue,
-  removeHighlight,
-  colorRandomWrongCell,
-  disableReset,
-  removeInlineStyledColor,
+  colorWrongInput,
   hasMorethanOneValue,
-  enableReset
-} from "./js/views/puzzleView";
+  onCellClick
+} from "./js/views/cellView";
 import {
-  showBadgeCount,
-  getNumpadValue,
-  setNumpadValue,
-  resetNumpad,
-  setEditMode
-} from "./js/views/numpadView";
-import { playWinningSound, stopWinningSound } from "./sounds";
+  enableSetting,
+  disableSetting,
+  settingsBadgeCount
+} from "./js/views/settingsView";
 
 //?Keep track of game state: Puzzle
 export const state = {};
@@ -52,6 +60,7 @@ function setupListeners() {
   elements.reset.addEventListener("click", reset);
   elements.check.addEventListener("click", check);
   elements.solve.addEventListener("click", solve);
+  elements.hint.addEventListener("click", hint);
 
   //*4 Numpad listeners
   elements.numpad.addEventListener("click", setNumpadValue);
@@ -65,7 +74,7 @@ function setupListeners() {
 //?Puzzle board related stuff
 export function controlPuzzle() {
   //*1. Show game started notification
-  $(".toast.puzzle-load").toast("show");
+  gameStartedNotification();
 
   //*2. get difficulty level selected by user
   const difficulty = getLevel();
@@ -94,7 +103,11 @@ export function controlPuzzle() {
 
   //*
   setEditMode(false);
-  enableReset();
+  enableSetting(DOMStrings.resetBtn);
+  enableSetting(DOMStrings.hintBtn);
+  enableSetting(DOMStrings.checkErrorBtn);
+  state.hints = 3;
+  state.checkErrors = 3;
 }
 
 function newGame() {
@@ -204,7 +217,7 @@ function reset() {
   makeBoard(state.puzzle.board);
   badgeCounter();
   showBadgeCount();
-  $(".toast.puzzle-reset").toast("show");
+  undoNotification();
 }
 
 //*User has option to undo (go back to previous board state)
@@ -252,15 +265,45 @@ function check() {
 
   if (wrongCells.length === 0) {
     //*there are no errors
+    noErrors();
     return true;
   } else {
     //*highlight one of the wrongcells if user chooses
     //* hint option
-    colorRandomWrongCell(wrongCells);
+    // colorRandomWrongCell(wrongCells);
+    if (state.checkErrors >= 0 && wrongCells.length > 0) {
+      wrongCells.forEach(cell => colorWrongInput(cell));
+      state.checkErrors--;
+      settingsBadgeCount(DOMStrings.badgeErrorCount, state.checkErrors);
+      if (state.checkErrors === 0) {
+        disableSetting(DOMStrings.checkErrorBtn);
+      }
+    }
+
     return false;
   }
 }
 
+function hint() {
+  const cell = state.currentCell;
+
+  if (
+    document.querySelector(`.${cell}`).classList.contains("unsolved") &&
+    state.hints > 0
+  ) {
+    const index = squares.indexOf(cell);
+    const value = state.solvedValArray[index];
+
+    setCellValue(value);
+    state.hints--;
+    settingsBadgeCount(DOMStrings.badgeHintCount, state.hints);
+    if (state.hints === 0) {
+      disableSetting(DOMStrings.hintBtn);
+    }
+  } else {
+    noHintsforPrefilledCells();
+  }
+}
 //*Solve the entire puzzle
 function solve() {
   bootbox.confirm({
@@ -282,7 +325,7 @@ function solve() {
         makeBoard(state.solvedValArray);
         badgeCounter();
         showBadgeCount();
-        disableReset();
+        disableSetting(DOMStrings.resetBtn);
       }
     }
   });
@@ -293,3 +336,4 @@ function solve() {
 );
 
 setupListeners();
+// $(".toast").toast();
